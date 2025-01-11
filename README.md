@@ -1,3 +1,91 @@
+
+# Tablas de la database
+
+## **Obras**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único de la obra.|
+|`titulo`|String||Título de la obra.|
+|`tipo`|String||Tipo de obra (pintura, escultura, etc.).|
+|`precio`|Float||Precio de venta de la obra.|
+|`descripcion`|String||Descripción detallada de la obra.|
+|`fechaCreacion`|DateTime||Fecha de creación de la obra.|
+|`estado`|String||Estado de la obra (`disponible`, `vendida`, etc.).|
+|`idAutor`|Int|FK (Artistas)|Relación con la tabla `Artistas`.|
+|`detalles`|DetallesVentas[]||Relación con la tabla intermedia `DetallesVentas`.|
+|`fechaRegistro`|DateTime||Fecha de registro de la obra.|
+|`fechaModificacion`|DateTime||Fecha de última modificación de la obra.|
+
+---
+
+## **Clientes**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único del cliente.|
+|`nombre`|String||Nombre completo del cliente.|
+|`direccion`|String||Dirección del cliente.|
+|`telefono`|String||Número de contacto del cliente.|
+|`email`|String||Correo electrónico del cliente.|
+|`compras`|Ventas[]||Relación con las ventas realizadas por el cliente.|
+|`fechaRegistro`|DateTime||Fecha de registro del cliente.|
+|`fechaModificacion`|DateTime||Fecha de última modificación del cliente.|
+
+---
+
+## **Empleados**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único del empleado.|
+|`nombre`|String||Nombre completo del empleado.|
+|`cargo`|String||Puesto del empleado (vendedor, administrador, etc.).|
+|`telefono`|String||Número de contacto del empleado.|
+|`email`|String||Correo electrónico del empleado.|
+|`fechaContratacion`|DateTime||Fecha de contratación del empleado.|
+|`fechaRegistro`|DateTime||Fecha de registro del empleado.|
+|`fechaModificacion`|DateTime||Fecha de última modificación del empleado.|
+
+---
+
+## **Ventas**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único de la venta.|
+|`fecha`|DateTime||Fecha de la venta.|
+|`idCliente`|Int|FK (Clientes)|Relación con la tabla `Clientes`.|
+|`cliente`|Clientes||Relación con los datos del cliente.|
+|`idEmpleado`|Int|FK (Empleados)|Relación con la tabla `Empleados`.|
+|`total`|Float||Total de la venta.|
+|`detalles`|DetallesVentas[]||Relación con la tabla intermedia `DetallesVentas`.|
+|`fechaRegistro`|DateTime||Fecha de registro de la venta.|
+|`fechaModificacion`|DateTime||Fecha de última modificación de la venta.|
+
+---
+
+## **DetallesVentas**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único del registro.|
+|`idVenta`|Int|FK (Ventas)|Relación con la tabla `Ventas`.|
+|`idObra`|Int|FK (Obras)|Relación con la tabla `Obras`.|
+|`venta`|Ventas||Relación con los datos de la venta.|
+|`obra`|Obras||Relación con los datos de la obra.|
+
+---
+
+---
+---
+---
+
+# INFORMACIÓN AUTGENERADA DE NEXTJS
+
+---
+---
+---
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Artistas {
+  id                Int      @id @default(autoincrement())
+  nombre            String
+  pais              String 
+  fechaNac          DateTime
+  biografia         String?
+  obras             Obras[]                                                       //Un autor puede tener muchas obras
+  fechaRegistro     DateTime @default(now())
+  fechaModificacion DateTime @updatedAt
+}
+
+model Obras {
+  id                Int      @id @default(autoincrement())
+  titulo            String
+  tipo              String
+  precio            Float
+  descripcion       String
+  fechaCreacion     DateTime
+  estado            String
+  autor             Artistas @relation(fields: [idAutor], references: [id])       //Un obra tiene un autor
+  idAutor           Int
+  detalles          DetallesVentas[] // Relación con la tabla intermedia
+  fechaRegistro     DateTime @default(now())
+  fechaModificacion DateTime @updatedAt
+}
+
+model Clientes {
+  id                Int      @id @default(autoincrement())
+  nombre            String
+  direccion         String
+  telefono          String
+  email             String
+  compras           Ventas[]                                                      //Un cliente puede tener muchas ventas
+  fechaRegistro     DateTime @default(now())
+  fechaModificacion DateTime @updatedAt
+}
+
+model Ventas {
+  id                Int      @id @default(autoincrement())
+  fecha             DateTime
+  cliente           Clientes @relation(fields: [idCliente], references: [id])
+  idCliente         Int
+  total             Float
+  detalles          DetallesVentas[] // Relación con la tabla intermedia
+  fechaRegistro     DateTime @default(now())
+  fechaModificacion DateTime @updatedAt
+}
+
+model DetallesVentas {
+  id        Int    @id @default(autoincrement()) // ID único para cada registro
+  venta     Ventas @relation(fields: [idVenta], references: [id]) // Relación con Ventas
+  idVenta   Int
+  obra      Obras  @relation(fields: [idObra], references: [id])  // Relación con Obras
+  idObra    Int
+}
+
+model Empleados {
+  id                Int      @id @default(autoincrement())
+  nombre            String
+  cargo             String
+  telefono          String
+  email             String
+  fechaContratacion DateTime
+  fechaRegistro     DateTime @default(now())
+  fechaModificacion DateTime @updatedAt
+}
