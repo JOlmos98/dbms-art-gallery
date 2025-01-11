@@ -1,3 +1,108 @@
+
+# Tablas de la database
+
+---
+
+## **Artistas**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único del artista.|
+|`nombre`|String||Nombre completo del artista.|
+|`pais`|String||País de origen del artista.|
+|`fechaNac`|DateTime||Fecha de nacimiento del artista.|
+|`biografia`|String?||Breve descripción opcional del artista.|
+|`obras`|Obras[]||Relación con las obras del artista.|
+|`fechaRegistro`|DateTime||Fecha de registro del artista.|
+|`fechaModificacion`|DateTime||Fecha de última modificación del artista.|
+
+---
+
+## **Obras**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único de la obra.|
+|`titulo`|String||Título de la obra.|
+|`tipo`|String||Tipo de obra (pintura, escultura, etc.).|
+|`precio`|Float||Precio de venta de la obra.|
+|`descripcion`|String||Descripción detallada de la obra.|
+|`fechaCreacion`|DateTime||Fecha de creación de la obra.|
+|`estado`|String||Estado de la obra (`disponible`, etc.).|
+|`autor`|Artistas|FK (Artistas)|Relación con el autor de la obra.|
+|`idAutor`|Int|FK|Identificador del autor.|
+|`detalles`|DetallesVentas[]||Relación con la tabla `DetallesVentas`.|
+|`fechaRegistro`|DateTime||Fecha de registro de la obra.|
+|`fechaModificacion`|DateTime||Fecha de última modificación de la obra.|
+
+---
+
+## **Clientes**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único del cliente.|
+|`nombre`|String||Nombre completo del cliente.|
+|`direccion`|String||Dirección del cliente.|
+|`telefono`|String||Número de contacto del cliente.|
+|`email`|String||Correo electrónico del cliente.|
+|`compras`|Ventas[]||Relación con las ventas realizadas.|
+|`fechaRegistro`|DateTime||Fecha de registro del cliente.|
+|`fechaModificacion`|DateTime||Fecha de última modificación del cliente.|
+
+---
+
+## **Ventas**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único de la venta.|
+|`fecha`|DateTime||Fecha de la venta.|
+|`cliente`|Clientes|FK (Clientes)|Relación con el cliente.|
+|`idCliente`|Int|FK|Identificador del cliente.|
+|`total`|Float||Total de la venta.|
+|`detalles`|DetallesVentas[]||Relación con la tabla `DetallesVentas`.|
+|`fechaRegistro`|DateTime||Fecha de registro de la venta.|
+|`fechaModificacion`|DateTime||Fecha de última modificación de la venta.|
+
+---
+
+## **DetallesVentas**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único del registro.|
+|`venta`|Ventas|FK (Ventas)|Relación con la tabla `Ventas`.|
+|`idVenta`|Int|FK|Identificador de la venta.|
+|`obra`|Obras|FK (Obras)|Relación con la tabla `Obras`.|
+|`idObra`|Int|FK|Identificador de la obra.|
+
+---
+
+## **Empleados**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único del empleado.|
+|`nombre`|String||Nombre completo del empleado.|
+|`cargo`|String||Puesto del empleado.|
+|`telefono`|String||Número de contacto del empleado.|
+|`email`|String||Correo electrónico del empleado.|
+|`fechaContratacion`|DateTime||Fecha de contratación del empleado.|
+|`fechaRegistro`|DateTime||Fecha de registro del empleado.|
+|`fechaModificacion`|DateTime||Fecha de última modificación del empleado.|
+
+---
+
+---
+---
+---
+
+# Información autogenerada por Next.js
+
+---
+---
+---
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
