@@ -1,6 +1,23 @@
 
 # Tablas de la database
 
+---
+
+## **Artistas**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único del artista.|
+|`nombre`|String||Nombre completo del artista.|
+|`pais`|String||País de origen del artista.|
+|`fechaNac`|DateTime||Fecha de nacimiento del artista.|
+|`biografia`|String?||Breve descripción opcional del artista.|
+|`obras`|Obras[]||Relación con las obras del artista.|
+|`fechaRegistro`|DateTime||Fecha de registro del artista.|
+|`fechaModificacion`|DateTime||Fecha de última modificación del artista.|
+
+---
+
 ## **Obras**
 
 |Campo|Tipo|Clave|Descripción|
@@ -11,9 +28,10 @@
 |`precio`|Float||Precio de venta de la obra.|
 |`descripcion`|String||Descripción detallada de la obra.|
 |`fechaCreacion`|DateTime||Fecha de creación de la obra.|
-|`estado`|String||Estado de la obra (`disponible`, `vendida`, etc.).|
-|`idAutor`|Int|FK (Artistas)|Relación con la tabla `Artistas`.|
-|`detalles`|DetallesVentas[]||Relación con la tabla intermedia `DetallesVentas`.|
+|`estado`|String||Estado de la obra (`disponible`, etc.).|
+|`autor`|Artistas|FK (Artistas)|Relación con el autor de la obra.|
+|`idAutor`|Int|FK|Identificador del autor.|
+|`detalles`|DetallesVentas[]||Relación con la tabla `DetallesVentas`.|
 |`fechaRegistro`|DateTime||Fecha de registro de la obra.|
 |`fechaModificacion`|DateTime||Fecha de última modificación de la obra.|
 
@@ -28,24 +46,9 @@
 |`direccion`|String||Dirección del cliente.|
 |`telefono`|String||Número de contacto del cliente.|
 |`email`|String||Correo electrónico del cliente.|
-|`compras`|Ventas[]||Relación con las ventas realizadas por el cliente.|
+|`compras`|Ventas[]||Relación con las ventas realizadas.|
 |`fechaRegistro`|DateTime||Fecha de registro del cliente.|
 |`fechaModificacion`|DateTime||Fecha de última modificación del cliente.|
-
----
-
-## **Empleados**
-
-|Campo|Tipo|Clave|Descripción|
-|---|---|---|---|
-|`id`|Int|PK|Identificador único del empleado.|
-|`nombre`|String||Nombre completo del empleado.|
-|`cargo`|String||Puesto del empleado (vendedor, administrador, etc.).|
-|`telefono`|String||Número de contacto del empleado.|
-|`email`|String||Correo electrónico del empleado.|
-|`fechaContratacion`|DateTime||Fecha de contratación del empleado.|
-|`fechaRegistro`|DateTime||Fecha de registro del empleado.|
-|`fechaModificacion`|DateTime||Fecha de última modificación del empleado.|
 
 ---
 
@@ -55,11 +58,10 @@
 |---|---|---|---|
 |`id`|Int|PK|Identificador único de la venta.|
 |`fecha`|DateTime||Fecha de la venta.|
-|`idCliente`|Int|FK (Clientes)|Relación con la tabla `Clientes`.|
-|`cliente`|Clientes||Relación con los datos del cliente.|
-|`idEmpleado`|Int|FK (Empleados)|Relación con la tabla `Empleados`.|
+|`cliente`|Clientes|FK (Clientes)|Relación con el cliente.|
+|`idCliente`|Int|FK|Identificador del cliente.|
 |`total`|Float||Total de la venta.|
-|`detalles`|DetallesVentas[]||Relación con la tabla intermedia `DetallesVentas`.|
+|`detalles`|DetallesVentas[]||Relación con la tabla `DetallesVentas`.|
 |`fechaRegistro`|DateTime||Fecha de registro de la venta.|
 |`fechaModificacion`|DateTime||Fecha de última modificación de la venta.|
 
@@ -70,10 +72,25 @@
 |Campo|Tipo|Clave|Descripción|
 |---|---|---|---|
 |`id`|Int|PK|Identificador único del registro.|
-|`idVenta`|Int|FK (Ventas)|Relación con la tabla `Ventas`.|
-|`idObra`|Int|FK (Obras)|Relación con la tabla `Obras`.|
-|`venta`|Ventas||Relación con los datos de la venta.|
-|`obra`|Obras||Relación con los datos de la obra.|
+|`venta`|Ventas|FK (Ventas)|Relación con la tabla `Ventas`.|
+|`idVenta`|Int|FK|Identificador de la venta.|
+|`obra`|Obras|FK (Obras)|Relación con la tabla `Obras`.|
+|`idObra`|Int|FK|Identificador de la obra.|
+
+---
+
+## **Empleados**
+
+|Campo|Tipo|Clave|Descripción|
+|---|---|---|---|
+|`id`|Int|PK|Identificador único del empleado.|
+|`nombre`|String||Nombre completo del empleado.|
+|`cargo`|String||Puesto del empleado.|
+|`telefono`|String||Número de contacto del empleado.|
+|`email`|String||Correo electrónico del empleado.|
+|`fechaContratacion`|DateTime||Fecha de contratación del empleado.|
+|`fechaRegistro`|DateTime||Fecha de registro del empleado.|
+|`fechaModificacion`|DateTime||Fecha de última modificación del empleado.|
 
 ---
 
@@ -81,7 +98,7 @@
 ---
 ---
 
-# INFORMACIÓN AUTGENERADA DE NEXTJS
+# Información autogenerada por Next.js
 
 ---
 ---
