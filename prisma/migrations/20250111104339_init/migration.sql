@@ -1,0 +1,21 @@
+-- CreateTable
+CREATE TABLE "Artistas" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nombre" TEXT NOT NULL,
+    "pais" TEXT NOT NULL,
+    "fechaNac" DATETIME NOT NULL,
+    "biografia" TEXT,
+    "fechaRegistro" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "fechaModificacion" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
+CREATE TABLE "Obras" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "titulo" TEXT NOT NULL,
+    "tipo" TEXT NOT NULL,
+    "precio" REAL NOT NULL,
+    "fechaCreacion" DATETIME NOT NULL,
+    "fechaRegistro" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "fechaModificacion" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
