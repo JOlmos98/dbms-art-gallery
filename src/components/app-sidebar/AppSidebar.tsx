@@ -1,58 +1,61 @@
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "@/components/ui/sidebar";
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, Database, Github, Home, Inbox, Pencil, Search, Settings } from "lucide-react"
+import Link from "next/link";
 
 
 // Menu items.
 const items = [
     {
-      title: "Home",
-      url: "#",
-      icon: Home,
+        title: "Home",
+        url: "/home",
+        icon: Home,
     },
     {
-      title: "Inbox",
-      url: "#",
-      icon: Inbox,
+        title: "Buscar",
+        url: "#",
+        icon: Search,
     },
     {
-      title: "Calendar",
-      url: "#",
-      icon: Calendar,
+        title: "Modificar",
+        url: "#",
+        icon: Pencil,
     },
     {
-      title: "Search",
-      url: "#",
-      icon: Search,
+        title: "SQL",
+        url: "/sql",
+        icon: Database,
     },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings,
-    },
-  ]
-   
-  export function AppSidebar() {
+]
+
+export function AppSidebar() {
     return (
-      <Sidebar>
-        <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>Application</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <a href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        </SidebarContent>
-      </Sidebar>
+        <Sidebar>
+            <SidebarContent>
+                <SidebarGroup>
+                    <SidebarGroupLabel className="mb-5">SGBD Galería de Arte</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            {items.map((item) => (
+                                <SidebarMenuItem key={item.title}>
+                                    <SidebarMenuButton asChild className="text-3xl">
+                                        <Link href={item.url} className="p-6">
+                                            <item.icon style={{ width: "1.5rem", height: "1.5rem" }} />
+                                            <span className="text-xl m-2">{item.title}</span>
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
+
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+                <SidebarFooter className="mt-auto">
+                    <Link href="https://github.com/JOlmos98/dbms-art-gallery" className="flex items-center m-2 gap-2 hover:text-blue-600">
+                        <Github style={{ width: "1rem", height: "1rem" }} />
+                        <span>Proyecto en Github</span>
+                    </Link>
+                </SidebarFooter>
+            </SidebarContent>
+        </Sidebar>
     )
-  }
+}

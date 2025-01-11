@@ -2,7 +2,7 @@
 export default function SQLPage() {
   return (
     <div>
-      <h1>Hello Page</h1>
+      <h1>WEB para consultas SQL</h1>
     </div>
   );
 }
