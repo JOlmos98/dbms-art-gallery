@@ -6,6 +6,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: var(--background);
   color: var(--foreground);
+  /*overflow: hidden;*/
 }
 
 @layer base {
@@ -23,6 +24,7 @@ body {
     --sidebar-accent-foreground: 225 17% 21%;
     --sidebar-border: 225 10% 30%;
     --sidebar-ring: 40 100% 76%;
+    --sidebar-active: #c9a965;
   }
 
   /* Tema oscuro */
