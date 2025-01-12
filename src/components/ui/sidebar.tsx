@@ -278,7 +278,7 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <PanelLeft style={{ width: "1.7rem", height: "1.7rem" }} />
+      <AlignJustify style={{ width: "1.7rem", height: "1.7rem" }} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

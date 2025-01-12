@@ -1,5 +1,5 @@
 
-export default function TablePage() {
+export default function VistaGeneralPage() {
   return (
     <div>
       <h1>Hello Page</h1>
