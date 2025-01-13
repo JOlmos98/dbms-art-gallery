@@ -1,9 +1,9 @@
 "use client";
 
-import { FormEvent } from 'react';
-import { useForm } from 'react-hook-form';
+import { FormEvent } from "react";
+import { useForm } from "react-hook-form";
 
-export default function VentasPage() {
+export const InsertEmpleados = () => {
 
   const { register, handleSubmit } = useForm();
   const onsubmit = (data: FormEvent) => {
@@ -15,7 +15,7 @@ export default function VentasPage() {
       <div className="flex flex-col row-start-2 items-start sm:items-start">
         <h1 className="text-4xl font-bold mb-8 mt-8"></h1>
         <div>
-          <h2 className="text-2xl font-bold mb-8">Insertar</h2>
+          <h2 className="text-2xl font-bold mb-8"></h2>
           <form action="" onSubmit={onsubmit} className='flex  flex-col w-200 items-center justify-center gap-1'>
             <label htmlFor="username" className='text-xl pt-3'>Username</label>
             <input 
@@ -53,3 +53,4 @@ export default function VentasPage() {
     </div>
   );
 }
+

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { InsertArtistas } from '@/components';
+import { InsertArtistas, InsertClientes, InsertEmpleados, InsertObras } from '@/components';
+import { InsertVentas } from '../../../components/insert-form/InsertVentas';
 
 export default function InsertarPage() {
 
@@ -19,8 +20,11 @@ export default function InsertarPage() {
                 <TabsTrigger value="ventas">Ventas</TabsTrigger>
                 <TabsTrigger value="empleados">Empleados</TabsTrigger>
               </TabsList>
-              <TabsContent value="artistas" className=""> <InsertArtistas /> </TabsContent>
-              <TabsContent value="obras">Change your password here.</TabsContent>
+              <TabsContent value="artistas"> <InsertArtistas /> </TabsContent>
+              <TabsContent value="obras"> <InsertObras /> </TabsContent>
+              <TabsContent value="clientes"> <InsertClientes /> </TabsContent>
+              <TabsContent value="ventas"> <InsertVentas /> </TabsContent>
+              <TabsContent value="empleados"> <InsertEmpleados /> </TabsContent>
             </Tabs>
         </div>
       </div>
