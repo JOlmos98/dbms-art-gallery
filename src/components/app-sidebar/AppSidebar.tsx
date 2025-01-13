@@ -57,7 +57,7 @@ export function AppSidebar() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                    <Link href={item.url} className={`p-6 ${ pathname === item.url ? "bg-[#514d43]" : "" }`}>
+                                    <Link href={item.url} className={`p-6 ${ pathname.includes(item.url) ? " text-sidebar-accent" : "" }`}>
                                             <item.icon style={{ width: "1.5rem", height: "1.5rem" }}/>
                                             <span className="text-xl m-2">{item.title}</span>
                                         </Link>

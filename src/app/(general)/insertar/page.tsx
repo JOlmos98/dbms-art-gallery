@@ -7,7 +7,7 @@ export default function InsertarPage() {
       <div className="flex flex-col row-start-2 items-start sm:items-start">
         <h1 className="text-4xl font-bold mb-8 mt-8"></h1>
         <div className='flex flex-col gap-4'>
-          <h2 className="text-4xl font-bold mb-8">Insertar</h2>
+          <h2 className="text-4xl font-bold mb-8 text-sidebar-accent">Insertar</h2>
           <Link href="/insertar/artistas" className='bg-sidebar py-4 px-12 rounded-xl hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-2xl'>Artistas</Link>
           <Link href="/insertar/obras" className='bg-sidebar py-4 px-12 rounded-xl hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-2xl'>Obras</Link>
           <Link href="/insertar/clientes" className='bg-sidebar py-4 px-12 rounded-xl hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-2xl'>Clientes</Link>
