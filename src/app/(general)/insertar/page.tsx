@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { InsertArtistas, InsertClientes, InsertEmpleados, InsertObras } from '@/components';
 import { InsertVentas } from '../../../components/insert-form/InsertVentas';
@@ -6,11 +5,10 @@ import { InsertVentas } from '../../../components/insert-form/InsertVentas';
 export default function InsertarPage() {
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen mx-36">
-      <div className="flex flex-col row-start-2 items-start sm:items-start">
-        <h1 className="text-4xl font-bold mb-8 mt-8"></h1>
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center mx-20 ">
+      <div className="flex flex-col row-start-2 items-start sm:items-start mt-6">
         <div className='flex flex-col gap-4'>
-          <h2 className="text-4xl font-bold mb-8 text-sidebar-accent">Insertar</h2>
+          <h2 className="text-4xl font-bold  text-sidebar-accent">Insertar</h2>
 
             <Tabs defaultValue="account" >
               <TabsList className=''>
