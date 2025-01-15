@@ -1,6 +1,5 @@
 "use client";
 
-import { FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -10,11 +9,6 @@ import { Input } from "@/components/ui/input"
 import { clientesSchema } from "@/schemas/clientesSchema";
 
 export const InsertClientes = () => {
-
-  const { register, handleSubmit } = useForm();
-  const onsubmit = (data: FormEvent) => {
-    console.log(data); //Lo que hace el form al pulsar el botón type="submit"
-  }
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof clientesSchema>>({

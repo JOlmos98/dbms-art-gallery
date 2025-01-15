@@ -1,7 +1,7 @@
 "use client";
 
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "@/components/ui/sidebar";
-import { Calendar, CirclePlus, Database, Github, Home, Inbox, LayoutGrid, Pencil, Search, Settings } from "lucide-react"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from "@/components/ui/sidebar";
+import { CirclePlus, Database, Github, Home, LayoutGrid, Pencil, Search, Settings } from "lucide-react"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
