@@ -1,6 +1,31 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use tauri::{generate_handler, Builder};
+mod dto;                  // Define el módulo para dto.rs
+mod clientes_repository;  // Define el módulo para clientes_repository.rs
+mod commands;             // Define el módulo para commands.rs
+
+/// Función de ejemplo para probar Tauri
+#[tauri::command]
+fn greet(name: &str) -> String {
+    format!("Hello, {}! Bienvenido a la aplicación de la galería.", name)
+}
+
 fn main() {
-  app_lib::run();
+    println!(" ========== Tauri iniciado ==========");
+    
+    Builder::default()
+        .invoke_handler(generate_handler![
+            commands::get_all_clientes_command,
+            commands::get_cliente_by_id_command,
+            commands::insertar_cliente_command,
+            commands::eliminar_cliente_command,
+            commands::modificar_nombre_cliente_command,
+            greet,
+        ])
+        .run(tauri::generate_context!())
+        .expect("Error al iniciar la aplicación");
+
+    println!(" ========== Aplicación finalizada ==========");
 }
