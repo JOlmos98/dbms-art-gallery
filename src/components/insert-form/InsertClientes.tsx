@@ -1,16 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import {Form,FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessage} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { toast } from "sonner"; // Importa el toast de shadcn
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { clientesSchema } from "@/schemas/clientesSchema";
+import { insertarCliente } from "@/backend/invokeClientes";
 
 export const InsertClientes = () => {
 
-  // 1. Define your form.
   const form = useForm<z.infer<typeof clientesSchema>>({
     resolver: zodResolver(clientesSchema),
     defaultValues: {
@@ -20,92 +22,97 @@ export const InsertClientes = () => {
       email: "",
       confirmarEmail: "",
     },
-  })
+  });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof clientesSchema>) {
-    // Do something with the form values.
+  const [loading, setLoading] = useState(false);
 
-    console.log("ESTE ES EL EMAIL 1: ", values.email)
-    console.log("esto son todos los valores en json: ", JSON.stringify(values));
-    console.log("ESTOS SON LOS VVALORES EN BRUTO: ", values);
-  }
+  const onSubmit = async (values: z.infer<typeof clientesSchema>) => {
+    setLoading(true);
+    try {
+      await insertarCliente(values.nombre, values.direccion, values.telefono, values.email);
+
+      // Usar el sistema de toasts de shadcn
+      toast.success("Cliente registrado correctamente.", {
+        description: `Cliente ${values.nombre} registrado con éxito.`,
+      });
+
+      form.reset(); // Reinicia el formulario después de un registro exitoso
+    } catch (error) {
+      // Manejo de errores con toast
+      toast.error("Error al registrar cliente.", {
+        description: "Revisa los datos ingresados o intenta nuevamente.",
+      });
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-start justify-items-center my-2">
-      <div className="flex flex-col row-start-2 items-start sm:items-start">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-            <FormField control={form.control} name="nombre" render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nombre</FormLabel>
-                <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                  <Input placeholder="nombre" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Nombre completo del cliente.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )} />
+    <div className="p-6 max-w-lg mx-auto rounded">
+      <h1 className="text-2xl mb-4">Registrar Cliente</h1>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField control={form.control} name="nombre" render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nombre</FormLabel>
+              <FormControl className="bg-gray-600 border-none text-sidebar-accent">
+                <Input placeholder="Nombre" {...field} />
+              </FormControl>
+              <FormDescription>Nombre completo del cliente.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )} />
 
-            <FormField control={form.control} name="direccion" render={({ field }) => (
-              <FormItem>
-                <FormLabel>Dirección</FormLabel>
-                <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                  <Input placeholder="dirección" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Dirección de particular o empresa.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )} />
+          <FormField control={form.control} name="direccion" render={({ field }) => (
+            <FormItem>
+              <FormLabel>Dirección</FormLabel>
+              <FormControl className="bg-gray-600 border-none text-sidebar-accent">
+                <Input placeholder="Dirección" {...field} />
+              </FormControl>
+              <FormDescription>Dirección del cliente.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )} />
 
-            <FormField control={form.control} name="telefono" render={({ field }) => (
-              <FormItem>
-                <FormLabel>Teléfono</FormLabel>
-                <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                  <Input placeholder="teléfono" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Número de teléfono del cliente.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )} />
+          <FormField control={form.control} name="telefono" render={({ field }) => (
+            <FormItem>
+              <FormLabel>Teléfono</FormLabel>
+              <FormControl className="bg-gray-600 border-none text-sidebar-accent">
+                <Input placeholder="Teléfono" {...field} />
+              </FormControl>
+              <FormDescription>Número de teléfono del cliente.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )} />
 
-            <FormField control={form.control} name="email" render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                  <Input placeholder="email" className="w-80" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Email del cliente.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )} />
+          <FormField control={form.control} name="email" render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl className="bg-gray-600 border-none text-sidebar-accent">
+                <Input placeholder="Correo electrónico" {...field} />
+              </FormControl>
+              <FormDescription>Correo electrónico del cliente.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )} />
 
-            <FormField control={form.control} name="confirmarEmail" render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirmar Email</FormLabel>
-                <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                  <Input placeholder="email" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Repetir email.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )} />
+          <FormField control={form.control} name="confirmarEmail" render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirmar Email</FormLabel>
+              <FormControl className="bg-gray-600 border-none text-sidebar-accent">
+                <Input placeholder="Confirmar correo electrónico" {...field} />
+              </FormControl>
+              <FormDescription>Repetir correo electrónico.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )} />
 
-            <Button type="submit">Submit</Button>
-          </form>
-        </Form>
-      </div>
+          <Button type="submit" disabled={loading} className="w-full hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
+            {loading ? "Registrando..." : "Registrar Cliente"}
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 }
-

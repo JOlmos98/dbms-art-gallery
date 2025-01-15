@@ -7,8 +7,8 @@ pub struct Cliente {
     pub direccion: String,
     pub telefono: String,
     pub email: String,
-    pub fecha_registro: String,
-    pub fecha_modificacion: String,
+    pub fechaRegistro: String,
+    pub fechaModificacion: String,
 }
 
 // Puedes añadir más structs aquí según sea necesario, como `Empleado`, `Obra`, etc.
