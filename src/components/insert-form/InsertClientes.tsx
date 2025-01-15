@@ -32,14 +32,14 @@ export const InsertClientes = () => {
       await insertarCliente(values.nombre, values.direccion, values.telefono, values.email);
 
       // Usar el sistema de toasts de shadcn
-      toast.success("Cliente registrado correctamente.", {
-        description: `Cliente ${values.nombre} registrado con éxito.`,
+      toast.success("Operación realizada con éxito.", {
+        description: `Cliente ${values.nombre} registrado.`,
       });
 
       form.reset(); // Reinicia el formulario después de un registro exitoso
     } catch (error) {
       // Manejo de errores con toast
-      toast.error("Error al registrar cliente.", {
+      toast.error("Error al realizar operación.", {
         description: "Revisa los datos ingresados o intenta nuevamente.",
       });
       console.error(error);

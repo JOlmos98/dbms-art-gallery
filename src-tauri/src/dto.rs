@@ -1,5 +1,7 @@
 use serde::Serialize;
 
+#[allow(non_snake_case)] // Para ignorar el warning de la obligación a usar snake_case
+
 #[derive(Serialize, Debug)] // Habilita la serialización para enviar como JSON
 pub struct Cliente {
     pub id: i32,
