@@ -10,7 +10,7 @@ export default function InsertarPage() {
         <div className='flex flex-col gap-4'>
           <h2 className="text-4xl font-bold  text-sidebar-accent">Insertar</h2>
 
-            <Tabs defaultValue="account" >
+            <Tabs defaultValue="artistas" >
               <TabsList className=''>
                 <TabsTrigger value="artistas">Artistas</TabsTrigger>
                 <TabsTrigger value="obras">Obras</TabsTrigger>

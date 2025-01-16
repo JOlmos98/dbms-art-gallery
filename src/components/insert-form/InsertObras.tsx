@@ -3,21 +3,19 @@
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 
-export let isSuccessToast = false;
-
 export const InsertObras = () => {
 
   const onClick1 = () => {
-    isSuccessToast = true;
     toast.success("Operación realizada con éxito.", {
       description: "Obra registrada correctamente.",
+      className: "group-[.toaster]:text-green-500",
     });
   }
 
   const onClick2 = () => {
-    isSuccessToast = false;
     toast.error("Operación fallida.", {
       description: "Obra NO registrada.",
+      className: "group-[.toaster]:text-red-500",
     });
   }
 
@@ -30,7 +28,18 @@ export const InsertObras = () => {
           <Button onClick={onClick1} className="text-green-700">Toast test SUCCESS</Button>
           <div className="m-4"></div>
           <Button onClick={onClick2} className="text-red-700">Toast test ERROR</Button>
-
+          <Button
+            onClick={() =>
+              toast("Evento creado", {
+                description: "Domingo, 3 de diciembre de 2023 a las 9:00 AM",
+                action: {
+                  label: "Deshacer",
+                  onClick: () => console.log("Deshacer"),
+                },
+                className: "text-red-500 p-14 group-[.toaster]:text-green-500", // Cambia el color del texto a rojo
+              })
+            }
+          >TEST GREEN</Button>
         </div>
       </div>
     </div>

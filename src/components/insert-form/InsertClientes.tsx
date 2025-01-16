@@ -31,16 +31,20 @@ export const InsertClientes = () => {
     try {
       await insertarCliente(values.nombre, values.direccion, values.telefono, values.email);
 
-      // Usar el sistema de toasts de shadcn
       toast.success("Operación realizada con éxito.", {
         description: `Cliente ${values.nombre} registrado.`,
+        action: {
+          label: "Deshacer",
+          onClick: () => console.log("Deshacer"),
+        },
+        className: "group-[.toaster]:text-green-500",
       });
 
-      form.reset(); // Reinicia el formulario después de un registro exitoso
+      form.reset(); //! Reinicia el formulario después de un registro exitoso
     } catch (error) {
-      // Manejo de errores con toast
       toast.error("Error al realizar operación.", {
         description: "Revisa los datos ingresados o intenta nuevamente.",
+        className: "group-[.toaster]:text-red-500",
       });
       console.error(error);
     } finally {
@@ -50,7 +54,6 @@ export const InsertClientes = () => {
 
   return (
     <div className="p-6 max-w-lg mx-auto rounded">
-      <h1 className="text-2xl mb-4">Registrar Cliente</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField control={form.control} name="nombre" render={({ field }) => (
