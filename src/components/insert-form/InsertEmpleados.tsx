@@ -8,28 +8,29 @@ import { toast } from "sonner"; // Importa el toast de shadcn
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { clientesSchema } from "@/schemas/clientesSchema";
-import { insertarCliente } from "@/backend/invokeClientes";
+import { empleadosSchema } from "@/schemas/empleadosSchema";
+import { insertarEmpleado } from "@/backend/invokeEmpleados";
 
 export const InsertEmpleados = () => {
 
-  const form = useForm<z.infer<typeof clientesSchema>>({
-    resolver: zodResolver(clientesSchema),
+  const form = useForm<z.infer<typeof empleadosSchema>>({
+    resolver: zodResolver(empleadosSchema),
     defaultValues: {
       nombre: "",
-      direccion: "",
+      cargo: "",
       telefono: "",
       email: "",
       confirmarEmail: "",
+      fechaContratacion: "",
     },
   });
 
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (values: z.infer<typeof clientesSchema>) => {
+  const onSubmit = async (values: z.infer<typeof empleadosSchema>) => {
     setLoading(true);
     try {
-      await insertarCliente(values.nombre, values.direccion, values.telefono, values.email);
+      await insertarEmpleado(values.nombre, values.cargo, values.telefono, values.email, values.fechaContratacion);
 
       toast.success("Operación realizada con éxito.", {
         description: `Cliente ${values.nombre} registrado.`,
@@ -40,7 +41,7 @@ export const InsertEmpleados = () => {
         className: "group-[.toaster]:text-green-500",
       });
 
-      form.reset(); //! Reinicia el formulario después de un registro exitoso
+      form.reset();
     } catch (error) {
       toast.error("Error al realizar operación.", {
         description: "Revisa los datos ingresados o intenta nuevamente.",
@@ -53,7 +54,7 @@ export const InsertEmpleados = () => {
   };
 
   return (
-<div className="p-12 max-w-lg mx-auto rounded">
+    <div className="p-12 max-w-lg mx-auto rounded">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField control={form.control} name="nombre" render={({ field }) => (
@@ -62,18 +63,18 @@ export const InsertEmpleados = () => {
               <FormControl className="bg-gray-600 border-none text-sidebar-accent">
                 <Input placeholder="Nombre" {...field} />
               </FormControl>
-              <FormDescription>Nombre completo del cliente.</FormDescription>
+              <FormDescription>Nombre completo del empleado.</FormDescription>
               <FormMessage />
             </FormItem>
           )} />
 
-          <FormField control={form.control} name="direccion" render={({ field }) => (
+          <FormField control={form.control} name="cargo" render={({ field }) => (
             <FormItem>
-              <FormLabel>Dirección</FormLabel>
+              <FormLabel>Cargo</FormLabel>
               <FormControl className="bg-gray-600 border-none text-sidebar-accent">
                 <Input placeholder="Dirección" {...field} />
               </FormControl>
-              <FormDescription>Dirección del cliente.</FormDescription>
+              <FormDescription>Cargo del empleado.</FormDescription>
               <FormMessage />
             </FormItem>
           )} />
@@ -84,7 +85,7 @@ export const InsertEmpleados = () => {
               <FormControl className="bg-gray-600 border-none text-sidebar-accent">
                 <Input placeholder="Teléfono" {...field} />
               </FormControl>
-              <FormDescription>Número de teléfono del cliente.</FormDescription>
+              <FormDescription>Número de teléfono del empleado.</FormDescription>
               <FormMessage />
             </FormItem>
           )} />
@@ -95,7 +96,7 @@ export const InsertEmpleados = () => {
               <FormControl className="bg-gray-600 border-none text-sidebar-accent">
                 <Input placeholder="Correo electrónico" {...field} />
               </FormControl>
-              <FormDescription>Correo electrónico del cliente.</FormDescription>
+              <FormDescription>Correo electrónico del empleado.</FormDescription>
               <FormMessage />
             </FormItem>
           )} />
@@ -111,6 +112,17 @@ export const InsertEmpleados = () => {
             </FormItem>
           )} />
 
+          <FormField control={form.control} name="fechaContratacion" render={({ field }) => (
+            <FormItem>
+              <FormLabel>Fecha de contratación</FormLabel>
+              <FormControl className="bg-gray-600 border-none text-sidebar-accent">
+                <Input placeholder="YYYY-MM-DD" {...field}  />
+              </FormControl>
+              <FormDescription>Fecha en la que el empleado fue contratado.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )} />
+          
           <Button type="submit" disabled={loading} className="w-full hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
             {loading ? "Registrando..." : "Registrar Cliente"}
           </Button>
@@ -119,3 +131,52 @@ export const InsertEmpleados = () => {
     </div>
   );
 }
+
+/*           <SelectDate />
+
+"use client"
+
+import * as React from "react"
+import { format } from "date-fns"
+import { CalendarIcon } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+export function DatePickerDemo() {
+  const [date, setDate] = React.useState<Date>()
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[240px] justify-start text-left font-normal",
+            !date && "text-muted-foreground"
+          )}
+        >
+          <CalendarIcon />
+          {date ? format(date, "PPP") : <span>Pick a date</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+  )
+}
+
+
+*/
