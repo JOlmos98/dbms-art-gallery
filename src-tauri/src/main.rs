@@ -4,6 +4,7 @@
 use tauri::{generate_handler, Builder};
 mod dto;                  // Define el módulo para dto.rs
 mod clientes_repository;  // Define el módulo para clientes_repository.rs
+mod empleados_repository; // Define el módulo para empleados_repository.rs
 mod commands;             // Define el módulo para commands.rs
 
 /// Función de ejemplo para probar Tauri
@@ -22,6 +23,7 @@ fn main() {
             commands::insertar_cliente_command,
             commands::eliminar_cliente_command,
             commands::modificar_nombre_cliente_command,
+            commands::insertar_empleado_command,
             greet,
         ])
         .run(tauri::generate_context!())

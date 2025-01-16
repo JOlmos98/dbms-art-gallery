@@ -1,6 +1,11 @@
 use tauri::command;
+use crate::empleados_repository; 
 use crate::clientes_repository; // Importar el repositorio de clientes
 use crate::dto::Cliente;
+
+// ------------------------------------------------------------------------------------------------
+// ------------------------------------------ Clientes --------------------------------------------
+// ------------------------------------------------------------------------------------------------
 
 // Comando para obtener todos los clientes
 #[command]
@@ -46,3 +51,15 @@ pub fn modificar_nombre_cliente_command(id: i32, nuevo_nombre: String) -> Result
     }
 }
 
+// ------------------------------------------------------------------------------------------------
+// ------------------------------------------ Empleados -------------------------------------------
+// ------------------------------------------------------------------------------------------------
+
+#[allow(non_snake_case)]
+#[command]
+pub fn insertar_empleado_command(nombre: String, cargo: String, telefono: String, email: String, fechaContratacion: String) -> Result<String, String> {
+    match empleados_repository::insertar_empleado(&nombre, &cargo, &telefono, &email, &fechaContratacion) {
+        Ok(_) => Ok(format!("Empleado {} insertado correctamente.", nombre)),
+        Err(err) => Err(format!("Error al insertar empleado: {}", err)),
+    }
+}
