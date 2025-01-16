@@ -31,7 +31,7 @@ model Obras {
   estado            String
   autor             Artistas @relation(fields: [idAutor], references: [id])       //Un obra tiene un autor
   idAutor           Int
-  detalles          DetallesVentas[] // Relación con la tabla intermedia
+  detalles          DetallesVentas[]                                              // Relación con la tabla intermedia
   fechaRegistro     DateTime @default(now())
   fechaModificacion DateTime @updatedAt
 }
@@ -53,16 +53,16 @@ model Ventas {
   cliente           Clientes @relation(fields: [idCliente], references: [id])
   idCliente         Int
   total             Float
-  detalles          DetallesVentas[] // Relación con la tabla intermedia
+  detalles          DetallesVentas[]                                              // Relación con la tabla intermedia
   fechaRegistro     DateTime @default(now())
   fechaModificacion DateTime @updatedAt
 }
 
 model DetallesVentas {
-  id        Int    @id @default(autoincrement()) // ID único para cada registro
-  venta     Ventas @relation(fields: [idVenta], references: [id]) // Relación con Ventas
+  id        Int    @id @default(autoincrement())                                  // ID único para cada registro
+  venta     Ventas @relation(fields: [idVenta], references: [id])                 // Relación con Ventas
   idVenta   Int
-  obra      Obras  @relation(fields: [idObra], references: [id])  // Relación con Obras
+  obra      Obras  @relation(fields: [idObra], references: [id])                  // Relación con Obras
   idObra    Int
 }
 

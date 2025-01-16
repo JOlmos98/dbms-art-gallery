@@ -23,6 +23,7 @@ pub fn get_all_clientes() -> Result<Vec<Cliente>, String> {
                 email: row.get(4)?,
                 fechaRegistro: row.get(5)?,
                 fechaModificacion: row.get(6)?,
+                compras: None, // No cargamos las compras aquí
             })
         })
         .map_err(|e| format!("Error al ejecutar la consulta: {}", e))?;
@@ -56,6 +57,7 @@ pub fn get_cliente_by_id(id: i32) -> Result<Cliente, String> {
                 email: row.get(4)?,
                 fechaRegistro: row.get(5)?,
                 fechaModificacion: row.get(6)?,
+                compras: None, // No cargamos las compras aquí
             })
         })
         .map_err(|e| format!("Error al ejecutar la consulta: {}", e))?;
