@@ -24,6 +24,7 @@ fn main() {
             commands::eliminar_cliente_command,
             commands::modificar_nombre_cliente_command,
             commands::insertar_empleado_command,
+            commands::get_all_empleados_command,
             greet,
         ])
         .run(tauri::generate_context!())

@@ -1,3 +1,44 @@
+"use client";
+
+import { ColumnDef } from "@tanstack/react-table";
+
+export type Empleado = {
+  id: number;
+  nombre: string;
+  cargo: string;
+  telefono: string;
+  email: string;
+  fechaContratacion: string;
+};
+
+export const columns: ColumnDef<Empleado>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "nombre",
+    header: "Nombre",
+  },
+  {
+    accessorKey: "cargo",
+    header: "Cargo",
+  },
+  {
+    accessorKey: "telefono",
+    header: "Teléfono",
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
+  },
+  {
+    accessorKey: "fechaContratacion",
+    header: "Fecha de Contratación",
+  },
+];
+
+/* DOCUMETNACION DE SHADCN
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
@@ -25,3 +66,4 @@ export const columns: ColumnDef<Payment>[] = [
     header: "Amount",
   },
 ]
+*/

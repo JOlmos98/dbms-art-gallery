@@ -2,6 +2,7 @@ use tauri::command;
 use crate::empleados_repository; 
 use crate::clientes_repository; // Importar el repositorio de clientes
 use crate::dto::Cliente;
+use crate::dto::Empleado;
 
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------ Clientes --------------------------------------------
@@ -63,3 +64,20 @@ pub fn insertar_empleado_command(nombre: String, cargo: String, telefono: String
         Err(err) => Err(format!("Error al insertar empleado: {}", err)),
     }
 }
+
+#[allow(non_snake_case)]
+#[command]
+pub fn get_all_empleados_command() -> Result<Vec<Empleado>, String> {
+    empleados_repository::get_all_empleados()
+}
+
+
+
+
+/*
+
+pub fn get_all_clientes_command() -> Result<Vec<Cliente>, String> {
+    clientes_repository::get_all_clientes()
+}
+
+*/

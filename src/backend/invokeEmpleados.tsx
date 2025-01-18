@@ -1,6 +1,18 @@
-'use client'
-
 import { invoke } from "@tauri-apps/api/core";
+import { Empleado } from "./dto";
+
+// -------------------- Obtener todos los clientes --------------------
+export async function getAllEmpleados(): Promise<Empleado[]> {
+  try {
+    const empleados = await invoke<Empleado[]>("get_all_empleados_command");
+    console.log("Empleados obtenidos:", empleados);
+    return empleados;
+  } catch (error) {
+    console.error("Error al obtener empleados:", error);
+    throw error;
+  }
+}
+
 
 // -------------------- Insertar un nuevo empleado --------------------
 export async function insertarEmpleado(nombre: string, cargo: string, telefono: string, email: string, fechaContratacion: string): Promise<void> {
