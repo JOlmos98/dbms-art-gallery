@@ -10,12 +10,12 @@ export const empleadosSchema = z.object({
     }),
 
     // Validación de la dirección:
-    cargo: z.string().min(3, {
-        message: "La dirección debe contener al menos 5 caracteres.",
+    cargo: z.enum(['Empleado', 'Encargado', 'Directivo'], {
+        message: 'El cargo debe ser Empleado, Encargado o Directivo',
     }),
 
     // Validación del teléfono:
-    telefono: z.string().min(6, {
+    telefono: z.string().min(9, {
         message: "Número de teléfono no válido.",
     }).max(15, {
         message: "Número de teléfono no válido.",
@@ -35,7 +35,7 @@ export const empleadosSchema = z.object({
         "La fecha de contratación debe estar en formato YYYY-MM-DD.",
     ),
 
-// Validación de repetición de email:
+    // Validación de repetición de email:
 }).refine((data) => data.email === data.confirmarEmail, {
     message: "Los correos electrónicos deben coincidir.",
     path: ["confirmarEmail"], // Campo que muestra el error

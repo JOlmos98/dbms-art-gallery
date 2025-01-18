@@ -17,7 +17,7 @@ export const InsertEmpleados = () => {
     resolver: zodResolver(empleadosSchema),
     defaultValues: {
       nombre: "",
-      cargo: "",
+      cargo: "Empleado",
       telefono: "",
       email: "",
       confirmarEmail: "",
@@ -72,7 +72,7 @@ export const InsertEmpleados = () => {
             <FormItem>
               <FormLabel>Cargo</FormLabel>
               <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                <Input placeholder="Dirección" {...field} />
+                <Input placeholder="Empleado, Encargado o Directivo" {...field} />
               </FormControl>
               <FormDescription>Cargo del empleado.</FormDescription>
               <FormMessage />

@@ -15,7 +15,7 @@ export const clientesSchema = z.object({
     }),
 
     // Validación del teléfono:
-    telefono: z.string().min(6, {
+    telefono: z.string().min(9, {
         message: "Número de teléfono no válido.",
     }).max(15, {
         message: "Número de teléfono no válido.",
