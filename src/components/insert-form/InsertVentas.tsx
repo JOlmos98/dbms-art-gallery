@@ -53,9 +53,9 @@ export const InsertVentas = () => {
   };
 
   return (
-<div className="p-12 max-w-lg mx-auto rounded">
+<div className="p-8 max-w-lg mx-auto rounded">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <FormField control={form.control} name="nombre" render={({ field }) => (
             <FormItem>
               <FormLabel>Nombre</FormLabel>
