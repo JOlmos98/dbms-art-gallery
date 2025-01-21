@@ -12,7 +12,7 @@ export default function VGEmpleadosPage() {
                         Vista general de Empleados
                     </h2>
                     <p className="text-lg mb-5">
-                        La tabla <span className="font-bold text-sidebar-accent">Artistas</span> registra datos de los creadores, como su nombre, país de origen. La tabla <span className="font-bold text-sidebar-accent">Obras</span> almacena...
+                        La tabla <span className="font-bold text-sidebar-accent">Empleados</span> registra el nombre, cargo, teléfono, email y fecha de contratación de los empleados.
                     </p>
                 </div>
 
