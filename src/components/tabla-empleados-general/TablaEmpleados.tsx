@@ -27,11 +27,7 @@ export const TablaEmpleados = () => {
 
   return (
     <div>
-      {loading ? (
-        <p>Cargando empleados...</p>
-      ) : (
-        <DataTable columns={columns} data={empleados} />
-      )}
+      {loading ? (<p>Cargando empleados...</p>) : (<DataTable columns={columns} data={empleados} />)}
     </div>
   );
 };
