@@ -23,8 +23,15 @@ fn main() {
             commands::insertar_cliente_command,
             commands::eliminar_cliente_command,
             commands::modificar_nombre_cliente_command,
+
             commands::insertar_empleado_command,
             commands::get_all_empleados_command,
+            commands::get_empleado_by_id_command,
+            commands::get_all_empleados_by_cargo_command,
+            commands::get_count_empleados_command,
+            commands::get_last_update_at_empleados_command,
+            commands::delete_empleado_command,
+            commands::update_empleado_command,
             greet,
         ])
         .run(tauri::generate_context!())

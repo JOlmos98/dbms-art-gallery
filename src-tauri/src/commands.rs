@@ -56,6 +56,7 @@ pub fn modificar_nombre_cliente_command(id: i32, nuevo_nombre: String) -> Result
 // ------------------------------------------ Empleados -------------------------------------------
 // ------------------------------------------------------------------------------------------------
 
+/// Insertar empleado
 #[allow(non_snake_case)]
 #[command]
 pub fn insertar_empleado_command(nombre: String, cargo: String, telefono: String, email: String, fechaContratacion: String) -> Result<String, String> {
@@ -65,13 +66,60 @@ pub fn insertar_empleado_command(nombre: String, cargo: String, telefono: String
     }
 }
 
+/// Obtener todos los empleados
 #[allow(non_snake_case)]
 #[command]
 pub fn get_all_empleados_command() -> Result<Vec<Empleado>, String> {
     empleados_repository::get_all_empleados()
 }
 
+/// Obtener un empleado por ID
+#[allow(non_snake_case)]
+#[command]
+pub fn get_empleado_by_id_command(id: i32) -> Result<Empleado, String> {
+    empleados_repository::get_empleado_by_id(id)
+}
 
+/// Obtener todos los empleados por cargo
+#[allow(non_snake_case)]
+#[command]
+pub fn get_all_empleados_by_cargo_command(cargo: String) -> Result<Vec<Empleado>, String> {
+    empleados_repository::get_all_empleados_by_cargo(&cargo)
+}
+
+/// Obtener la cantidad total de empleados
+#[allow(non_snake_case)]
+#[command]
+pub fn get_count_empleados_command() -> Result<i32, String> {
+    empleados_repository::get_count_empleados()
+}
+
+/// Obtener la última fecha de actualización en la tabla Empleados
+#[allow(non_snake_case)]
+#[command]
+pub fn get_last_update_at_empleados_command() -> Result<String, String> {
+    empleados_repository::get_last_update_at_empleados()
+}
+
+/// Eliminar un empleado por ID
+#[allow(non_snake_case)]
+#[command]
+pub fn delete_empleado_command(id: i32) -> Result<String, String> {
+    match empleados_repository::delete_empleado(id) {
+        Ok(_) => Ok(format!("Empleado con ID {} eliminado correctamente.", id)),
+        Err(err) => Err(format!("Error al eliminar empleado: {}", err)),
+    }
+}
+
+/// Actualizar la información de un empleado
+#[allow(non_snake_case)]
+#[command]
+pub fn update_empleado_command(id: i32, nombre: String, cargo: String, telefono: String, email: String, fechaContratacion: String) -> Result<String, String> {
+    match empleados_repository::update_empleado(id, &nombre, &cargo, &telefono, &email, &fechaContratacion) {
+        Ok(_) => Ok(format!("Empleado con ID {} actualizado correctamente.", id)),
+        Err(err) => Err(format!("Error al actualizar empleado: {}", err)),
+    }
+}
 
 
 /*
