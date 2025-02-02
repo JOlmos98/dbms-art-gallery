@@ -165,6 +165,7 @@ pub fn delete_empleado(id: i32) -> Result<usize, String> {
 }
 
 /// Actualizar la información de un empleado
+#[allow(non_snake_case)]
 pub fn update_empleado(id: i32, nombre: &str, cargo: &str, telefono: &str, email: &str, fechaContratacion: &str) -> Result<usize, String> {
     let conn = Connection::open("../prisma/gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
@@ -180,27 +181,3 @@ pub fn update_empleado(id: i32, nombre: &str, cargo: &str, telefono: &str, email
 
     Ok(rows_updated)
 }
-
-
-/* 
-// Insertar un nuevo cliente
-pub fn insertar_cliente(
-    nombre: &str,
-    direccion: &str,
-    telefono: &str,
-    email: &str,
-) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
-        .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
-
-    let rows_inserted = conn
-        .execute(
-            "INSERT INTO Clientes (nombre, direccion, telefono, email, fechaRegistro, fechaModificacion)
-             VALUES (?1, ?2, ?3, ?4, datetime('now'), datetime('now'))",
-            params![nombre, direccion, telefono, email],
-        )
-        .map_err(|e| format!("Error al insertar cliente: {}", e))?;
-
-    Ok(rows_inserted)
-}
-    */
