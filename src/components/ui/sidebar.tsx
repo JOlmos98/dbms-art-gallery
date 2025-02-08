@@ -3,8 +3,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { AlignJustify, PanelLeft } from "lucide-react"
-
+import { AlignJustify } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -271,14 +270,14 @@ const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      className={cn("h-7 w-7", className)}
+      className={cn("fixed h-10 w-12 bg-sidebar hover:bg-sidebar-accent", className)}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
       }}
       {...props}
     >
-      <AlignJustify />
+      <AlignJustify style={{ width: "1.7rem", height: "1.7rem" }} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

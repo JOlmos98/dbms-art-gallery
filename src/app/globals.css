@@ -4,28 +4,50 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  /*overflow: hidden;*/
 }
 
 @layer base {
   :root {
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --background: #454b5f;
+    --foreground: #f2f2f2;
+    
+    --sidebar-background: 225 17% 21%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 225 17% 15%;
+    --sidebar-primary-foreground: 0 0% 95%;
+    --sidebar-accent: 40 100% 76%;
+    --sidebar-accent-foreground: 225 17% 21%;
+    --sidebar-border: 225 10% 30%;
+    --sidebar-ring: 40 100% 76%;
+    --sidebar-active: #c9a965;
   }
+
+  /* Tema oscuro */
   .dark {
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Fondo general oscuro */
+    --sidebar-background: 225 17% 21%; /* #2d3140 */
+    
+    /* Texto claro */
+    --sidebar-foreground: 0 0% 95%;    /* #f2f2f2 */
+    
+    /* Elementos principales */
+    --sidebar-primary: 225 17% 15%;    /* Un tono más oscuro de #2d3140 */
+    --sidebar-primary-foreground: 0 0% 95%; /* #f2f2f2 */
+    
+    /* Elementos destacados (Hover/Resaltado) */
+    --sidebar-accent: 40 100% 76%;     /* #ffd885 */
+    --sidebar-accent-foreground: 225 17% 21%; /* #2d3140 */
+    
+    /* Bordes suaves */
+    --sidebar-border: 225 10% 30%;     /* Un borde sutil basado en el fondo */
+    
+    /* Resaltado o foco */
+    --sidebar-ring: 40 100% 76%;       /* #ffd885 */
   }
 }
+
