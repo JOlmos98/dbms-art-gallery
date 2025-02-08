@@ -7,7 +7,7 @@ use crate::dto::DetalleVenta;
 
 /// Insertar un nuevo detalle de venta
 pub fn insert_detalle_venta(idVenta: i32, idObra: i32) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_inserted = conn.execute(
@@ -21,7 +21,7 @@ pub fn insert_detalle_venta(idVenta: i32, idObra: i32) -> Result<usize, String> 
 
 /// Obtener todos los detalles de ventas
 pub fn get_all_detalles_ventas() -> Result<Vec<DetalleVenta>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -48,7 +48,7 @@ pub fn get_all_detalles_ventas() -> Result<Vec<DetalleVenta>, String> {
 
 /// Obtener todos los detalles de una venta específica
 pub fn get_detalles_by_venta(idVenta: i32) -> Result<Vec<DetalleVenta>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -75,7 +75,7 @@ pub fn get_detalles_by_venta(idVenta: i32) -> Result<Vec<DetalleVenta>, String> 
 
 /// Obtener todos los detalles de una obra específica
 pub fn get_detalles_by_obra(idObra: i32) -> Result<Vec<DetalleVenta>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -102,7 +102,7 @@ pub fn get_detalles_by_obra(idObra: i32) -> Result<Vec<DetalleVenta>, String> {
 
 /// Obtener la cantidad total de detalles de ventas
 pub fn get_count_detalles_ventas() -> Result<i32, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -118,7 +118,7 @@ pub fn get_count_detalles_ventas() -> Result<i32, String> {
 
 /// Eliminar un detalle de venta por ID
 pub fn delete_detalle_venta(id: i32) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_deleted = conn

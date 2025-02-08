@@ -5,7 +5,7 @@ use crate::dto::Obra;
 
 /// Obtener todos los artistas (incluyendo sus obras)
 pub fn get_all_artistas() -> Result<Vec<Artista>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -40,7 +40,7 @@ pub fn get_all_artistas() -> Result<Vec<Artista>, String> {
 
 /// Obtener todos los artistas por país (incluyendo sus obras)
 pub fn get_all_artistas_by_pais(pais: &str) -> Result<Vec<Artista>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -78,7 +78,7 @@ pub fn get_all_artistas_by_pais(pais: &str) -> Result<Vec<Artista>, String> {
 
 /// Obtener la cantidad total de artistas
 pub fn get_count_artistas() -> Result<i32, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -94,7 +94,7 @@ pub fn get_count_artistas() -> Result<i32, String> {
 
 /// Obtener la última fecha de actualización en la tabla Artistas
 pub fn get_last_update_at_artistas() -> Result<String, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -113,7 +113,7 @@ pub fn get_last_update_at_artistas() -> Result<String, String> {
 
 /// Obtener un artista por ID (incluyendo sus obras)
 pub fn get_artista_by_id(id: i32) -> Result<Artista, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -143,7 +143,7 @@ pub fn get_artista_by_id(id: i32) -> Result<Artista, String> {
 
 /// Insertar un nuevo artista
 pub fn insert_artista(nombre: &str, pais: &str, fechaNac: &str, biografia: Option<&str>) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_inserted = conn.execute(
@@ -158,7 +158,7 @@ pub fn insert_artista(nombre: &str, pais: &str, fechaNac: &str, biografia: Optio
 
 /// Eliminar un artista por ID
 pub fn delete_artista(id: i32) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_deleted = conn
@@ -170,7 +170,7 @@ pub fn delete_artista(id: i32) -> Result<usize, String> {
 
 /// Actualizar la información de un artista
 pub fn update_artista(id: i32, nombre: &str, pais: &str, fechaNac: &str, biografia: Option<&str>) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_updated = conn.execute(

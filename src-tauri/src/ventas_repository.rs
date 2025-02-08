@@ -3,7 +3,7 @@ use crate::dto::{Venta, DetalleVenta};
 
 /// Obtener todas las ventas
 pub fn get_all_ventas() -> Result<Vec<Venta>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -36,7 +36,7 @@ pub fn get_all_ventas() -> Result<Vec<Venta>, String> {
 
 /// Obtener una venta por ID
 pub fn get_venta_by_id(id: i32) -> Result<Venta, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -64,7 +64,7 @@ pub fn get_venta_by_id(id: i32) -> Result<Venta, String> {
 
 /// Obtener todas las ventas de un cliente específico
 pub fn get_ventas_by_cliente(id_cliente: i32) -> Result<Vec<Venta>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -98,7 +98,7 @@ pub fn get_ventas_by_cliente(id_cliente: i32) -> Result<Vec<Venta>, String> {
 
 /// Obtener la cantidad total de ventas
 pub fn get_count_ventas() -> Result<i32, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -114,7 +114,7 @@ pub fn get_count_ventas() -> Result<i32, String> {
 
 /// Obtener la última fecha de actualización en la tabla Ventas
 pub fn get_last_update_at_ventas() -> Result<String, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -133,7 +133,7 @@ pub fn get_last_update_at_ventas() -> Result<String, String> {
 
 /// Insertar una nueva venta
 pub fn insert_venta(id_cliente: i32, fecha: &str, total: f64) -> Result<i32, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     conn.execute(
@@ -149,7 +149,7 @@ pub fn insert_venta(id_cliente: i32, fecha: &str, total: f64) -> Result<i32, Str
 
 /// Eliminar una venta por ID
 pub fn delete_venta(id: i32) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_deleted = conn
@@ -161,7 +161,7 @@ pub fn delete_venta(id: i32) -> Result<usize, String> {
 
 /// Actualizar la información de una venta
 pub fn update_venta(id: i32, fecha: &str, total: f64) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_updated = conn.execute(

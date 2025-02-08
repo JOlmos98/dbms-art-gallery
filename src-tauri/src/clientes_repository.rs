@@ -34,7 +34,7 @@ fn get_compras_by_cliente(conn: &Connection, id_cliente: i32) -> Result<Vec<Vent
 
 /// Obtener todos los clientes
 pub fn get_all_clientes() -> Result<Vec<Cliente>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -72,7 +72,7 @@ pub fn get_all_clientes() -> Result<Vec<Cliente>, String> {
 
 /// Obtener un cliente por ID
 pub fn get_cliente_by_id(id: i32) -> Result<Cliente, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -104,7 +104,7 @@ pub fn get_cliente_by_id(id: i32) -> Result<Cliente, String> {
 
 /// Insertar un nuevo cliente
 pub fn insert_cliente(nombre: &str, direccion: &str, telefono: &str, email: &str) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_inserted = conn.execute(
@@ -119,7 +119,7 @@ pub fn insert_cliente(nombre: &str, direccion: &str, telefono: &str, email: &str
 
 /// Obtener la cantidad total de clientes
 pub fn get_count_clientes() -> Result<i32, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -135,7 +135,7 @@ pub fn get_count_clientes() -> Result<i32, String> {
 
 /// Obtener la última fecha de actualización en la tabla Clientes
 pub fn get_last_update_at_clientes() -> Result<String, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -154,7 +154,7 @@ pub fn get_last_update_at_clientes() -> Result<String, String> {
 
 /// Eliminar un cliente por ID
 pub fn delete_cliente(id: i32) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_deleted = conn
@@ -166,7 +166,7 @@ pub fn delete_cliente(id: i32) -> Result<usize, String> {
 
 /// Actualizar la información de un cliente
 pub fn update_cliente(id: i32, nombre: &str, direccion: &str, telefono: &str, email: &str) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_updated = conn.execute(

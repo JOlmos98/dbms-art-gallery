@@ -18,7 +18,7 @@ fn greet(name: &str) -> String {
 }
 
 fn main() {
-    println!(" ========== Tauri iniciado ==========");
+    println!(" ========== App de Tauri iniciada ==========");
     
     Builder::default()
         .invoke_handler(generate_handler![

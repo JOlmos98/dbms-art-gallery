@@ -4,7 +4,7 @@ use crate::dto::Empleado;
 /// Insertar empleado
 #[allow(non_snake_case)]
 pub fn insertar_empleado(nombre: &str, cargo: &str, telefono: &str, email: &str, fechaContratacion: &str) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db").map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
+    let conn = Connection::open("./gallery.db").map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_inserted = conn.execute("INSERT INTO Empleados (nombre, cargo, telefono, email, fechaContratacion, fechaRegistro, fechaModificacion) VALUES (?1, ?2, ?3, ?4, ?5, datetime('now'), datetime('now'))",
             params![nombre, cargo, telefono, email, fechaContratacion],
@@ -16,7 +16,7 @@ pub fn insertar_empleado(nombre: &str, cargo: &str, telefono: &str, email: &str,
 /// Obtener todos los empleados
 pub fn get_all_empleados() -> Result<Vec<Empleado>, String> {
     // Conectar a la base de datos
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     // Preparar la consulta SQL
@@ -54,7 +54,7 @@ pub fn get_all_empleados() -> Result<Vec<Empleado>, String> {
 
 /// Obtener todos los empleados por cargo
 pub fn get_all_empleados_by_cargo(cargo: &str) -> Result<Vec<Empleado>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -89,7 +89,7 @@ pub fn get_all_empleados_by_cargo(cargo: &str) -> Result<Vec<Empleado>, String> 
 
 /// Obtener la cantidad total de empleados
 pub fn get_count_empleados() -> Result<i32, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -105,7 +105,7 @@ pub fn get_count_empleados() -> Result<i32, String> {
 
 /// Obtener la última fecha de actualización en la tabla Empleados
 pub fn get_last_update_at_empleados() -> Result<String, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -124,7 +124,7 @@ pub fn get_last_update_at_empleados() -> Result<String, String> {
 
 /// Obtener un empleado por ID
 pub fn get_empleado_by_id(id: i32) -> Result<Empleado, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -154,7 +154,7 @@ pub fn get_empleado_by_id(id: i32) -> Result<Empleado, String> {
 
 /// Eliminar un empleado por ID
 pub fn delete_empleado(id: i32) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_deleted = conn
@@ -167,7 +167,7 @@ pub fn delete_empleado(id: i32) -> Result<usize, String> {
 /// Actualizar la información de un empleado
 #[allow(non_snake_case)]
 pub fn update_empleado(id: i32, nombre: &str, cargo: &str, telefono: &str, email: &str, fechaContratacion: &str) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_updated = conn

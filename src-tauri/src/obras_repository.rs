@@ -3,7 +3,7 @@ use crate::dto::{Obra, DetalleVenta};
 
 /// Obtener todas las obras
 pub fn get_all_obras() -> Result<Vec<Obra>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -41,7 +41,7 @@ pub fn get_all_obras() -> Result<Vec<Obra>, String> {
 
 /// Obtener todas las obras por tipo
 pub fn get_all_obras_by_tipo(tipo: &str) -> Result<Vec<Obra>, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -79,7 +79,7 @@ pub fn get_all_obras_by_tipo(tipo: &str) -> Result<Vec<Obra>, String> {
 
 /// Obtener la cantidad total de obras
 pub fn get_count_obras() -> Result<i32, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -95,7 +95,7 @@ pub fn get_count_obras() -> Result<i32, String> {
 
 /// Obtener la última fecha de actualización en la tabla Obras
 pub fn get_last_update_at_obras() -> Result<String, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -114,7 +114,7 @@ pub fn get_last_update_at_obras() -> Result<String, String> {
 
 /// Obtener una obra por ID
 pub fn get_obra_by_id(id: i32) -> Result<Obra, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let mut stmt = conn
@@ -147,7 +147,7 @@ pub fn get_obra_by_id(id: i32) -> Result<Obra, String> {
 
 /// Insertar una nueva obra
 pub fn insert_obra(titulo: &str, tipo: &str, precio: f64, descripcion: &str, fechaCreacion: &str, estado: &str, idAutor: i32) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_inserted = conn.execute(
@@ -162,7 +162,7 @@ pub fn insert_obra(titulo: &str, tipo: &str, precio: f64, descripcion: &str, fec
 
 /// Eliminar una obra por ID
 pub fn delete_obra(id: i32) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_deleted = conn
@@ -174,7 +174,7 @@ pub fn delete_obra(id: i32) -> Result<usize, String> {
 
 /// Actualizar la información de una obra
 pub fn update_obra(id: i32, titulo: &str, tipo: &str, precio: f64, descripcion: &str, fechaCreacion: &str, estado: &str) -> Result<usize, String> {
-    let conn = Connection::open("../prisma/gallery.db")
+    let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_updated = conn.execute(
