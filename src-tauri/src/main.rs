@@ -10,6 +10,7 @@ mod obras_repository;
 mod ventas_repository;
 mod detalles_ventas_repository;
 mod commands;             // Define el módulo para commands.rs
+mod init_db;
 
 /// Función de ejemplo para probar Tauri
 #[tauri::command]
@@ -19,6 +20,10 @@ fn greet(name: &str) -> String {
 
 fn main() {
     println!(" ========== App de Tauri iniciada ==========");
+    match init_db::init_db() {
+        Ok(_) => println!("Base de datos inicializada correctamente."),
+        Err(e) => eprintln!("Error al inicializar la base de datos: {}", e),
+    }
     
     Builder::default()
         .invoke_handler(generate_handler![
