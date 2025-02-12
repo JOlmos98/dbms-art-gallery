@@ -56,7 +56,6 @@ export default function VistaGeneralPage() {
     fetchData();
   }, []);
 
-
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen mx-28">
       <div className="flex flex-col row-start-2 items-start sm:items-start">
@@ -72,13 +71,12 @@ export default function VistaGeneralPage() {
             <div className="bg-sidebar-primary p-4 rounded-xl hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group">
                 <h2 className="font-bold justify-start text-2xl">Artistas</h2>
                 <div className="flex flex-col items-start p-2">
-                  <p>Número de registros:<span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                  <p>Número de registros: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                     {numArtistas !== null ? numArtistas : "Cargando..."}
                     </span>
                   </p>
                   <p>
-                    Última fecha de modificación:
-                    <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                    Última fecha de modificación: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                       {ultimaFechaArtistas ?? "Cargando..."}
                     </span>
                   </p>
@@ -90,13 +88,12 @@ export default function VistaGeneralPage() {
             <div className="bg-sidebar-primary p-4 rounded-xl hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group">
                 <h2 className="font-bold justify-start text-2xl">Clientes</h2>
                 <div className="flex flex-col items-start p-2">
-                  <p>Número de registros:<span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                  <p>Número de registros: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                     {numClientes !== null ? numClientes : "Cargando..."}
                     </span>
                   </p>
                   <p>
-                    Última fecha de modificación:
-                    <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                    Última fecha de modificación: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                       {ultimaFechaClientes ?? "Cargando..."}
                     </span>
                   </p>
@@ -108,11 +105,11 @@ export default function VistaGeneralPage() {
               <div className="bg-sidebar-primary p-4 rounded-xl hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group">
                 <h2 className="font-bold justify-start text-2xl">Empleados</h2>
                 <div className="flex flex-col items-start p-2">
-                  <p>Número de registros:<span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                  <p>Número de registros: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                     {numEmpleados !== null ? numEmpleados : "Cargando..."}
                   </span>
                   </p>
-                  <p>Última fecha de modificación:<span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                  <p>Última fecha de modificación: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                     {ultimaFechaEmpleados ?? "Cargando..."}
                   </span>
                   </p>
@@ -127,13 +124,12 @@ export default function VistaGeneralPage() {
             <div className="bg-sidebar-primary p-4 rounded-xl hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group">
                 <h2 className="font-bold justify-start text-2xl">Obras</h2>
                 <div className="flex flex-col items-start p-2">
-                  <p>Número de registros:<span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                  <p>Número de registros: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                     {numObras !== null ? numObras : "Cargando..."}
                     </span>
                   </p>
                   <p>
-                    Última fecha de modificación:
-                    <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                    Última fecha de modificación: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                       {ultimaFechaObras ?? "Cargando..."}
                     </span>
                   </p>
@@ -145,13 +141,12 @@ export default function VistaGeneralPage() {
             <div className="bg-sidebar-primary p-4 rounded-xl hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group">
                 <h2 className="font-bold justify-start text-2xl">Ventas</h2>
                 <div className="flex flex-col items-start p-2">
-                  <p>Número de registros:<span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                  <p>Número de registros: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                     {numVentas !== null ? numVentas : "Cargando..."}
                     </span>
                   </p>
                   <p>
-                    Última fecha de modificación:
-                    <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                    Última fecha de modificación: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                       {ultimaFechaVentas ?? "Cargando..."}
                     </span>
                   </p>
@@ -163,13 +158,12 @@ export default function VistaGeneralPage() {
             <div className="bg-sidebar-primary p-4 rounded-xl hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group">
                 <h2 className="font-bold justify-start text-2xl">DetallesVentas</h2>
                 <div className="flex flex-col items-start p-2">
-                  <p>Número de registros:<span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                  <p>Número de registros: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                     {numVentas !== null ? numVentas : "Cargando..."}
                     </span>
                   </p>
                   <p>
-                    Última fecha de modificación:
-                    <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
+                    Última fecha de modificación: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
                       {ultimaFechaVentas ?? "Cargando..."}
                     </span>
                   </p>

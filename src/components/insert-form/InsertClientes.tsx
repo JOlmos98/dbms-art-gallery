@@ -34,8 +34,8 @@ export const InsertClientes = () => {
       toast.success("Operación realizada con éxito.", {
         description: `Cliente ${values.nombre} registrado.`,
         action: {
-          label: "Deshacer",
-          onClick: () => console.log("Deshacer"),
+          label: "Ocultar",
+          onClick: () => console.log("Ocultar"),
         },
         className: "group-[.toaster]:text-green-500",
       });

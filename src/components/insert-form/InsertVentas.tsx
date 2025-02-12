@@ -4,45 +4,56 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { toast } from "sonner"; // Importa el toast de shadcn
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { clientesSchema } from "@/schemas/clientesSchema";
-import { insertCliente } from "@/backend/invokeClientes";
+import { ventasSchema } from "@/schemas/ventasSchema";
+import { insertVenta } from "@/backend/invokeVentas";
+import { updateObra } from "@/backend/invokeObras"; // Para cambiar el estado de las obras
+import { insertDetalleVenta } from "@/backend/invokeDetallesVentas"; // Para registrar detalles de venta
 
 export const InsertVentas = () => {
-
-  const form = useForm<z.infer<typeof clientesSchema>>({
-    resolver: zodResolver(clientesSchema),
+  const form = useForm<z.infer<typeof ventasSchema>>({
+    resolver: zodResolver(ventasSchema),
     defaultValues: {
-      nombre: "",
-      direccion: "",
-      telefono: "",
-      email: "",
-      confirmarEmail: "",
+      idCliente: "",
+      fecha: "",
+      total: "0",
+      obrasVendidas: [],
     },
   });
 
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (values: z.infer<typeof clientesSchema>) => {
+  const onSubmit = async (values: z.infer<typeof ventasSchema>) => {
     setLoading(true);
-    try {
-      await insertCliente(values.nombre, values.direccion, values.telefono, values.email);
+    const idCliente: number = parseInt(values.idCliente);
+    const total: number = parseInt(values.total);
+    const obrasVendidas: number[] = values.obrasVendidas.map(id => parseInt(id));
 
-      toast.success("Operación realizada con éxito.", {
-        description: `Cliente ${values.nombre} registrado.`,
+    try {
+      // Insertar la venta en la base de datos
+      const idVenta = await insertVenta(idCliente, values.fecha, total);
+
+      // Insertar detalles de venta y actualizar estado de obras
+      for (const idObra of obrasVendidas) {
+        await insertDetalleVenta(idVenta, idObra); // Asociar obra con la venta
+        await updateObra(idObra, "", "", 0, "", "", "No disponible"); // Cambiar estado a "No disponible"
+      }
+
+      toast.success("Venta registrada con éxito.", {
+        description: `Venta #${idVenta} creada con ${obrasVendidas.length} obra(s).`,
         action: {
-          label: "Deshacer",
-          onClick: () => console.log("Deshacer"),
+          label: "Ocultar",
+          onClick: () => console.log("Ocultar"),
         },
         className: "group-[.toaster]:text-green-500",
       });
 
-      form.reset(); //! Reinicia el formulario después de un registro exitoso
+      form.reset();
     } catch (error) {
-      toast.error("Error al realizar operación.", {
+      toast.error("Error al registrar la venta.", {
         description: "Revisa los datos ingresados o intenta nuevamente.",
         className: "group-[.toaster]:text-red-500",
       });
@@ -53,69 +64,73 @@ export const InsertVentas = () => {
   };
 
   return (
-<div className="p-8 max-w-lg mx-auto rounded">
+    <div className="p-8 max-w-lg mx-auto rounded">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-          <FormField control={form.control} name="nombre" render={({ field }) => (
+
+          {/* ID del Cliente */}
+          <FormField control={form.control} name="idCliente" render={({ field }) => (
             <FormItem>
-              <FormLabel>Nombre</FormLabel>
+              <FormLabel>ID del Cliente</FormLabel>
               <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                <Input placeholder="Nombre" {...field} />
+                <Input type="number" placeholder="ID del cliente" {...field} />
               </FormControl>
-              <FormDescription>Nombre completo del cliente.</FormDescription>
               <FormMessage />
             </FormItem>
           )} />
 
-          <FormField control={form.control} name="direccion" render={({ field }) => (
+          {/* Fecha de la Venta */}
+          <FormField control={form.control} name="fecha" render={({ field }) => (
             <FormItem>
-              <FormLabel>Dirección</FormLabel>
+              <FormLabel>Fecha de la Venta</FormLabel>
               <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                <Input placeholder="Dirección" {...field} />
+                <Input placeholder="YYYY-MM-DD" {...field} />
               </FormControl>
-              <FormDescription>Dirección del cliente.</FormDescription>
               <FormMessage />
             </FormItem>
           )} />
 
-          <FormField control={form.control} name="telefono" render={({ field }) => (
+          {/* Total de la Venta */}
+          <FormField control={form.control} name="total" render={({ field }) => (
             <FormItem>
-              <FormLabel>Teléfono</FormLabel>
+              <FormLabel>Total de la Venta</FormLabel>
               <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                <Input placeholder="Teléfono" {...field} />
+                <Input type="number" placeholder="Total en USD" {...field} />
               </FormControl>
-              <FormDescription>Número de teléfono del cliente.</FormDescription>
               <FormMessage />
             </FormItem>
           )} />
 
-          <FormField control={form.control} name="email" render={({ field }) => (
+          {/* Obras Vendidas */}
+          <FormField control={form.control} name="obrasVendidas" render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>IDs de Obras Vendidas</FormLabel>
               <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                <Input placeholder="Correo electrónico" {...field} />
+                <Input
+                  placeholder="IDs de obras separados por comas (ej: 1,2,3)"
+                  onChange={(e) => {
+                    const obrasArray = e.target.value
+                      .split(",")
+                      .map((id) => id.trim())
+                      .filter((id) => id !== "");
+                    field.onChange(obrasArray);
+                  }}
+                />
               </FormControl>
-              <FormDescription>Correo electrónico del cliente.</FormDescription>
+              <FormDescription>
+                Introduce los IDs de las obras vendidas separados por comas.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )} />
 
-          <FormField control={form.control} name="confirmarEmail" render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirmar Email</FormLabel>
-              <FormControl className="bg-gray-600 border-none text-sidebar-accent">
-                <Input placeholder="Confirmar correo electrónico" {...field} />
-              </FormControl>
-              <FormDescription>Repetir correo electrónico.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )} />
-
-          <Button type="submit" disabled={loading} className="w-full hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
-            {loading ? "Registrando..." : "Registrar Cliente"}
+          {/* Botón de Envío */}
+          <Button type="submit" disabled={loading} className="w-full">
+            {loading ? "Registrando..." : "Registrar Venta"}
           </Button>
+
         </form>
       </Form>
     </div>
   );
-}
+};

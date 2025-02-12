@@ -35,7 +35,7 @@ fn main() {
             commands::delete_cliente_command,
             commands::update_cliente_command,
             
-            commands::insertar_empleado_command,
+            commands::insert_empleado_command,
             commands::get_all_empleados_command,
             commands::get_empleado_by_id_command,
             commands::get_all_empleados_by_cargo_command,
@@ -44,7 +44,7 @@ fn main() {
             commands::delete_empleado_command,
             commands::update_empleado_command,
 
-            commands::insertar_artista_command,
+            commands::insert_artista_command,
             commands::get_all_artistas_command,
             commands::get_artista_by_id_command,
             commands::get_all_artistas_by_pais_command,

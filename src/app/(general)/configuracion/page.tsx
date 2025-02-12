@@ -1,3 +1,4 @@
+import { Loading } from "@/components";
 
 export default function ConfiguracionPage() {
   return (
@@ -5,12 +6,9 @@ export default function ConfiguracionPage() {
       <div className="flex flex-col row-start-2 items-start sm:items-start">
         <div>
           <h2 className="text-4xl font-bold mb-8 mt-10 text-sidebar-accent">Configuración</h2>
-          <p>
-          text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text
-          text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text
-          text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text
-          text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text example text
-          </p>
+          <div className="flex flex-col items-center mx-96">
+          <Loading />
+          </div>
         </div>
       </div>
     </div>

@@ -16,9 +16,9 @@ export async function getAllEmpleados(): Promise<Empleado[]> {
 }
 
 // -------------------- Insertar un nuevo empleado --------------------
-export async function insertarEmpleado(nombre: string, cargo: string, telefono: string, email: string, fechaContratacion: string): Promise<void> {
+export async function insertEmpleado(nombre: string, cargo: string, telefono: string, email: string, fechaContratacion: string): Promise<void> {
   try {
-    const response = await invoke<string>("insertar_empleado_command", {
+    const response = await invoke<string>("insert_empleado_command", {
       nombre,
       cargo,
       telefono,

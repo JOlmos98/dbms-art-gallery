@@ -3,7 +3,7 @@ use crate::dto::Empleado;
 
 /// Insertar empleado
 #[allow(non_snake_case)]
-pub fn insertar_empleado(nombre: &str, cargo: &str, telefono: &str, email: &str, fechaContratacion: &str) -> Result<usize, String> {
+pub fn insert_empleado(nombre: &str, cargo: &str, telefono: &str, email: &str, fechaContratacion: &str) -> Result<usize, String> {
     let conn = Connection::open("./gallery.db").map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
 
     let rows_inserted = conn.execute("INSERT INTO Empleados (nombre, cargo, telefono, email, fechaContratacion, fechaRegistro, fechaModificacion) VALUES (?1, ?2, ?3, ?4, ?5, datetime('now'), datetime('now'))",

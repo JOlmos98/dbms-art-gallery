@@ -1,5 +1,5 @@
 use rusqlite::{params, Connection, Result};
-use crate::dto::{Venta, DetalleVenta};
+use crate::dto::Venta;
 
 /// Obtener todas las ventas
 pub fn get_all_ventas() -> Result<Vec<Venta>, String> {

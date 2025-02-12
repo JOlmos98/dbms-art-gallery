@@ -5,3 +5,4 @@ export { InsertVentas } from './insert-form/InsertVentas';
 export { InsertEmpleados } from './insert-form/InsertEmpleados';
 export { InsertClientes } from './insert-form/InsertClientes';
 export { SelectDate } from './select-date/SelectDate';
+export { Loading } from './loading/Loading';

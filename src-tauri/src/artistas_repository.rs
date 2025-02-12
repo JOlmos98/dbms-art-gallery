@@ -142,6 +142,7 @@ pub fn get_artista_by_id(id: i32) -> Result<Artista, String> {
 
 
 /// Insertar un nuevo artista
+#[allow(non_snake_case)]
 pub fn insert_artista(nombre: &str, pais: &str, fechaNac: &str, biografia: Option<&str>) -> Result<usize, String> {
     let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
@@ -169,6 +170,7 @@ pub fn delete_artista(id: i32) -> Result<usize, String> {
 }
 
 /// Actualizar la información de un artista
+#[allow(non_snake_case)]
 pub fn update_artista(id: i32, nombre: &str, pais: &str, fechaNac: &str, biografia: Option<&str>) -> Result<usize, String> {
     let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;

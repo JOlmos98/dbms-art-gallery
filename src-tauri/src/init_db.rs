@@ -100,54 +100,64 @@ pub fn init_db() -> Result<()> {
     Ok(())
 }
 
+
+
 /// Función para insertar registros de ejemplo en cada tabla
 fn insert_example_data(conn: &Connection) -> Result<()> {
-    // Insertar un Cliente de ejemplo
+    // Insertar un Cliente de ejemplo si no existe
     conn.execute(
         "INSERT INTO Clientes (nombre, direccion, telefono, email, fechaModificacion) 
-         SELECT 'Juan Pérez', 'Calle 123', '555-1234', 'juan@example.com', CURRENT_TIMESTAMP
-         WHERE NOT EXISTS (SELECT 1 FROM Clientes LIMIT 1);",
+         SELECT 'John Doe', 'Calle Ejemplo', '123555123', 'johndoe@example.com', CURRENT_TIMESTAMP
+         WHERE NOT EXISTS (SELECT 1 FROM Clientes WHERE nombre = 'John Doe' LIMIT 1);",
         [],
     )?;
 
-    // Insertar un Empleado de ejemplo
+    // Insertar un Empleado de ejemplo si no existe
     conn.execute(
         "INSERT INTO Empleados (nombre, cargo, telefono, email, fechaContratacion, fechaModificacion) 
-         SELECT 'Carlos López', 'Vendedor', '555-5678', 'carlos@example.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
-         WHERE NOT EXISTS (SELECT 1 FROM Empleados LIMIT 1);",
+         SELECT 'José Martínez', 'Empleado', '123555123', 'jose@example.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+         WHERE NOT EXISTS (SELECT 1 FROM Empleados WHERE nombre = 'José Martínez' LIMIT 1);",
         [],
     )?;
 
-    // Insertar un Artista de ejemplo
+    // Insertar un Artista de ejemplo si no existe
     conn.execute(
         "INSERT INTO Artistas (nombre, pais, fechaNac, biografia, fechaModificacion) 
          SELECT 'Frida Kahlo', 'México', '1907-07-06', 'Pintora icónica del surrealismo', CURRENT_TIMESTAMP
-         WHERE NOT EXISTS (SELECT 1 FROM Artistas LIMIT 1);",
+         WHERE NOT EXISTS (SELECT 1 FROM Artistas WHERE nombre = 'Frida Kahlo' LIMIT 1);",
         [],
     )?;
 
-    // Insertar una Obra de ejemplo
+    // Insertar una Obra de ejemplo si no existe
     conn.execute(
         "INSERT INTO Obras (titulo, tipo, precio, descripcion, fechaCreacion, estado, idAutor, fechaModificacion) 
          SELECT 'Las dos Fridas', 'Pintura', 50000, 'Obra surrealista de Frida Kahlo', '1939-01-01', 'Disponible', id, CURRENT_TIMESTAMP 
-         FROM Artistas WHERE nombre = 'Frida Kahlo' LIMIT 1;",
+         FROM Artistas WHERE nombre = 'Frida Kahlo' 
+         AND NOT EXISTS (SELECT 1 FROM Obras WHERE titulo = 'Las dos Fridas' LIMIT 1)
+         LIMIT 1;",
         [],
     )?;
 
-    // Insertar una Venta de ejemplo
+    // Insertar una Venta de ejemplo si no existe
     conn.execute(
         "INSERT INTO Ventas (fecha, idCliente, total, fechaModificacion) 
          SELECT CURRENT_TIMESTAMP, id, 50000, CURRENT_TIMESTAMP 
-         FROM Clientes WHERE nombre = 'Juan Pérez' LIMIT 1;",
+         FROM Clientes WHERE nombre = 'John Doe' 
+         AND NOT EXISTS (SELECT 1 FROM Ventas WHERE idCliente = id AND total = 50000 LIMIT 1)
+         LIMIT 1;",
         [],
     )?;
 
-    // Insertar un Detalle de Venta de ejemplo
+    // Insertar un Detalle de Venta de ejemplo si no existe
     conn.execute(
         "INSERT INTO DetallesVentas (idVenta, idObra) 
          SELECT Ventas.id, Obras.id 
          FROM Ventas, Obras 
-         WHERE Ventas.total = 50000 AND Obras.titulo = 'Las dos Fridas' LIMIT 1;",
+         WHERE Ventas.total = 50000 AND Obras.titulo = 'Las dos Fridas' 
+         AND NOT EXISTS (
+             SELECT 1 FROM DetallesVentas WHERE idVenta = Ventas.id AND idObra = Obras.id LIMIT 1
+         )
+         LIMIT 1;",
         [],
     )?;
 

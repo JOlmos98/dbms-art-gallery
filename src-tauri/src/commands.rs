@@ -20,7 +20,7 @@ use crate::dto::DetalleVenta;
 /// Insertar un artista
 #[allow(non_snake_case)]
 #[command]
-pub fn insertar_artista_command(nombre: String, pais: String, fechaNac: String, biografia: Option<String>) -> Result<String, String> {
+pub fn insert_artista_command(nombre: String, pais: String, fechaNac: String, biografia: Option<String>) -> Result<String, String> {
     match artistas_repository::insert_artista(&nombre, &pais, &fechaNac, biografia.as_deref()) {
         Ok(_) => Ok(format!("Artista {} insertado correctamente.", nombre)),
         Err(err) => Err(format!("Error al insertar artista: {}", err)),
@@ -89,8 +89,8 @@ pub fn update_artista_command(id: i32, nombre: String, pais: String, fechaNac: S
 /// Insertar empleado
 #[allow(non_snake_case)]
 #[command]
-pub fn insertar_empleado_command(nombre: String, cargo: String, telefono: String, email: String, fechaContratacion: String) -> Result<String, String> {
-    match empleados_repository::insertar_empleado(&nombre, &cargo, &telefono, &email, &fechaContratacion) {
+pub fn insert_empleado_command(nombre: String, cargo: String, telefono: String, email: String, fechaContratacion: String) -> Result<String, String> {
+    match empleados_repository::insert_empleado(&nombre, &cargo, &telefono, &email, &fechaContratacion) {
         Ok(_) => Ok(format!("Empleado {} insertado correctamente.", nombre)),
         Err(err) => Err(format!("Error al insertar empleado: {}", err)),
     }

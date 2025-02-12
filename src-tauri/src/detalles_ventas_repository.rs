@@ -6,6 +6,7 @@ use crate::dto::DetalleVenta;
 /// ------------------------------------------------------------------------------------------------
 
 /// Insertar un nuevo detalle de venta
+#[allow(non_snake_case)]
 pub fn insert_detalle_venta(idVenta: i32, idObra: i32) -> Result<usize, String> {
     let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
@@ -47,6 +48,7 @@ pub fn get_all_detalles_ventas() -> Result<Vec<DetalleVenta>, String> {
 }
 
 /// Obtener todos los detalles de una venta específica
+#[allow(non_snake_case)]
 pub fn get_detalles_by_venta(idVenta: i32) -> Result<Vec<DetalleVenta>, String> {
     let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
@@ -74,6 +76,7 @@ pub fn get_detalles_by_venta(idVenta: i32) -> Result<Vec<DetalleVenta>, String> 
 }
 
 /// Obtener todos los detalles de una obra específica
+#[allow(non_snake_case)]
 pub fn get_detalles_by_obra(idObra: i32) -> Result<Vec<DetalleVenta>, String> {
     let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;

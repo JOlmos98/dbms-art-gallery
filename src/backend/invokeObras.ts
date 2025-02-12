@@ -70,7 +70,7 @@ export async function insertObra(
   precio: number,
   descripcion: string,
   fechaCreacion: string,
-  estado: string,
+  estado: string, //Disponible o No disponible.
   idAutor: number
 ): Promise<string> {
   try {
@@ -120,7 +120,7 @@ export async function updateObra(
       precio,
       descripcion,
       fechaCreacion,
-      estado,
+      estado, //Disponible o No disponible.
     });
     console.log(response);
     return response;
