@@ -1,10 +1,13 @@
 use tauri::command;
+use rusqlite::Connection;
+
 use crate::artistas_repository;
 use crate::empleados_repository; 
 use crate::clientes_repository; // Importar el repositorio de clientes
 use crate::obras_repository;
 use crate::ventas_repository;
 use crate::detalles_ventas_repository;
+use crate::example;
 
 use crate::dto::Cliente;
 use crate::dto::Empleado;
@@ -298,6 +301,22 @@ pub fn update_obra_command(
     }
 }
 
+/// Marcar una obra como "No disponible"
+#[allow(non_snake_case)]
+#[command]
+pub fn set_obra_no_disponible_command(id: i32) -> Result<String, String> {
+    match obras_repository::set_obra_no_disponible(id) {
+        Ok(_) => Ok(format!("Obra con ID {} marcada como 'No disponible'.", id)),
+        Err(err) => Err(format!("Error al actualizar estado de la obra: {}", err)),
+    }
+}
+
+#[allow(non_snake_case)]
+#[command]
+pub fn comprobar_estado_obra_command(id_obra: i32) -> Result<bool, String> {
+    obras_repository::comprobar_estado_obra(id_obra)
+}
+
 /// ------------------------------------------------------------------------------------------------
 /// ------------------------------------------ Ventas ----------------------------------------------
 /// ------------------------------------------------------------------------------------------------
@@ -413,5 +432,21 @@ pub fn delete_detalle_venta_command(id: i32) -> Result<String, String> {
     match detalles_ventas_repository::delete_detalle_venta(id) {
         Ok(_) => Ok(format!("Detalle de venta con ID {} eliminado correctamente.", id)),
         Err(err) => Err(format!("Error al eliminar detalle de venta: {}", err)),
+    }
+}
+
+/// ------------------------------------------------------------------------------------------------
+/// ----------------------------------------- Commands Example -------------------------------------
+/// ------------------------------------------------------------------------------------------------
+
+/// Command para insertar datos de ejemplo en la base de datos.
+/// Se ejecuta solo si hay menos de 5 Artistas, 5 Clientes o 10 Obras.
+#[tauri::command]
+pub fn insert_example_data_command() -> Result<String, String> {
+    let conn = Connection::open("./gallery.db").map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
+
+    match example::insert_example_data(&conn) {
+        Ok(_) => Ok("Registros de ejemplo insertados correctamente.".to_string()),
+        Err(err) => Err(format!("Error al insertar registros de ejemplo: {}", err)),
     }
 }

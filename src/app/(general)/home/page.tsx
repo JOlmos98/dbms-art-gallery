@@ -1,5 +1,7 @@
+import { ExampleButton } from "@/components";
 
 export default function HomePage() {
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen mx-10 sm:mx-28">
       <div className="flex flex-col row-start-2 items-start sm:items-start">
@@ -41,6 +43,7 @@ export default function HomePage() {
           <p className="text-lg leading-relaxed text-sidebar-foreground">
             Puedes acceder a las distintas secciones de la aplicación mediante el menú de navegación. La interfaz está diseñada para facilitar la gestión eficiente de la galería y su base de datos.
           </p>
+          <ExampleButton />
         </div>
       </div>
     </div>

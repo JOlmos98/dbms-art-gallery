@@ -189,3 +189,35 @@ pub fn update_obra(id: i32, titulo: &str, tipo: &str, precio: f64, descripcion: 
 
     Ok(rows_updated)
 }
+
+/// Marcar una obra como "No disponible" por su ID
+pub fn set_obra_no_disponible(id: i32) -> Result<usize, String> {
+    let conn = Connection::open("./gallery.db")
+        .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
+
+    let rows_updated = conn.execute(
+        "UPDATE Obras 
+         SET estado = 'No disponible', fechaModificacion = datetime('now') 
+         WHERE id = ?1",
+        params![id],
+    )
+    .map_err(|e| format!("Error al actualizar el estado de la obra: {}", e))?;
+
+    Ok(rows_updated)
+}
+
+/// Comprueba si una obra está disponible antes de asociarla a una venta
+pub fn comprobar_estado_obra(id_obra: i32) -> Result<bool, String> {
+    let conn = Connection::open("./gallery.db")
+        .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
+
+    let mut stmt = conn
+        .prepare("SELECT estado FROM Obras WHERE id = ?1")
+        .map_err(|e| format!("Error al preparar la consulta: {}", e))?;
+
+    let estado: String = stmt
+        .query_row([id_obra], |row| row.get(0))
+        .map_err(|e| format!("Error al obtener estado de la obra: {}", e))?;
+
+    Ok(estado == "Disponible") // Retorna `true` si la obra está disponible, `false` si no.
+}

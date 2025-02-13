@@ -6,3 +6,4 @@ export { InsertEmpleados } from './insert-form/InsertEmpleados';
 export { InsertClientes } from './insert-form/InsertClientes';
 export { SelectDate } from './select-date/SelectDate';
 export { Loading } from './loading/Loading';
+export { ExampleButton } from './example-button/ExampleButton';

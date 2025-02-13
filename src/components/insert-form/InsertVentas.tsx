@@ -10,7 +10,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { ventasSchema } from "@/schemas/ventasSchema";
 import { insertVenta } from "@/backend/invokeVentas";
-import { updateObra } from "@/backend/invokeObras"; // Para cambiar el estado de las obras
+import { comprobarEstadoObra, setObraNoDisponible } from "@/backend/invokeObras"; // Para cambiar el estado de las obras
 import { insertDetalleVenta } from "@/backend/invokeDetallesVentas"; // Para registrar detalles de venta
 
 export const InsertVentas = () => {
@@ -30,16 +30,35 @@ export const InsertVentas = () => {
     setLoading(true);
     const idCliente: number = parseInt(values.idCliente);
     const total: number = parseInt(values.total);
-    const obrasVendidas: number[] = values.obrasVendidas.map(id => parseInt(id));
+    const obrasVendidas: number[] = values.obrasVendidas.map((id) => parseInt(id));
 
     try {
+      let disponibles = true;
+
+      for (const idObra of obrasVendidas) {
+        const estadoDisponible = await comprobarEstadoObra(idObra);
+        if (!estadoDisponible) {
+          disponibles = false;
+          break;
+        }
+      }
+
+      if (!disponibles) {
+        toast.error("Error al registrar la venta.", {
+          description: "Una o más obras ya están vendidas.",
+          className: "group-[.toaster]:text-red-500",
+        });
+        setLoading(false);
+        return;
+      }
+
       // Insertar la venta en la base de datos
       const idVenta = await insertVenta(idCliente, values.fecha, total);
 
       // Insertar detalles de venta y actualizar estado de obras
       for (const idObra of obrasVendidas) {
         await insertDetalleVenta(idVenta, idObra); // Asociar obra con la venta
-        await updateObra(idObra, "", "", 0, "", "", "No disponible"); // Cambiar estado a "No disponible"
+        await setObraNoDisponible(idObra); // Cambiar estado a "No disponible"
       }
 
       toast.success("Venta registrada con éxito.", {

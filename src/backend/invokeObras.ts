@@ -129,3 +129,26 @@ export async function updateObra(
     throw error;
   }
 }
+
+// -------------------- Marcar una obra como "No disponible" --------------------
+export async function setObraNoDisponible(id: number): Promise<string> {
+  try {
+    const response = await invoke<string>("set_obra_no_disponible_command", { id });
+    console.log(`Obra con ID ${id} marcada como 'No disponible'.`);
+    return response;
+  } catch (error) {
+    console.error(`Error al actualizar estado de la obra con ID ${id}:`, error);
+    throw error;
+  }
+}
+
+// -------------------- Comprobar estado de una obra --------------------
+export async function comprobarEstadoObra(idObra: number): Promise<boolean> {
+  try {
+    const estado = await invoke<boolean>("comprobar_estado_obra_command", { id_obra: idObra });
+    return estado;
+  } catch (error) {
+    console.error(`Error al comprobar el estado de la obra con ID ${idObra}:`, error);
+    throw error;
+  }
+}

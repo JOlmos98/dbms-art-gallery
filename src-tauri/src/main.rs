@@ -11,6 +11,7 @@ mod ventas_repository;
 mod detalles_ventas_repository;
 mod commands;             // Define el módulo para commands.rs
 mod init_db;
+mod example;
 
 /// Función de ejemplo para probar Tauri
 #[tauri::command]
@@ -61,6 +62,8 @@ fn main() {
             commands::get_last_update_at_obras_command,
             commands::delete_obra_command,
             commands::update_obra_command,
+            commands::set_obra_no_disponible_command,
+            commands::comprobar_estado_obra_command,
 
             commands::insert_venta_command,
             commands::get_all_ventas_command,
@@ -77,6 +80,8 @@ fn main() {
             commands::get_detalles_by_obra_command,
             commands::get_count_detalles_ventas_command,
             commands::delete_detalle_venta_command,
+
+            commands::insert_example_data_command,
 
             greet,
         ])
