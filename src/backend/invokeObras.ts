@@ -145,7 +145,7 @@ export async function setObraNoDisponible(id: number): Promise<string> {
 // -------------------- Comprobar estado de una obra --------------------
 export async function comprobarEstadoObra(idObra: number): Promise<boolean> {
   try {
-    const estado = await invoke<boolean>("comprobar_estado_obra_command", { id_obra: idObra });
+    const estado = await invoke<boolean>("comprobar_estado_obra_command", { idObra }); // Cambia `id_obra` a `idObra`
     return estado;
   } catch (error) {
     console.error(`Error al comprobar el estado de la obra con ID ${idObra}:`, error);

@@ -2,6 +2,7 @@
 
 import { getCountArtistas, getLastUpdateAtArtistas } from "@/backend/invokeArtistas";
 import { getCountClientes, getLastUpdateAtClientes } from "@/backend/invokeClientes";
+import { getCountDetallesVentas } from "@/backend/invokeDetallesVentas";
 import { getCountEmpleados, getLastUpdateAtEmpleados } from "@/backend/invokeEmpleados";
 import { getCountObras, getLastUpdateAtObras } from "@/backend/invokeObras";
 import { getCountVentas, getLastUpdateAtVentas } from "@/backend/invokeVentas";
@@ -21,6 +22,7 @@ export default function VistaGeneralPage() {
   const [ultimaFechaObras, setUltimaFechaObras] = useState<string | null>(null);
   const [numVentas, setNumVentas] = useState<number | null>(null);
   const [ultimaFechaVentas, setUltimaFechaVentas] = useState<string | null>(null);
+  const [numDetallesVentas, setNumDetallesVentas] = useState<number | null>(null);
   
   useEffect(() => {
     async function fetchData() {
@@ -49,6 +51,10 @@ export default function VistaGeneralPage() {
         const lastUpdateVentas = await getLastUpdateAtVentas();
         setNumVentas(countVentas);
         setUltimaFechaVentas(lastUpdateVentas);
+
+        const countDetallesVentas = await getCountDetallesVentas();
+        setNumDetallesVentas(countDetallesVentas);
+
       } catch (error) {
         console.error("Error al obtener datos:", error);
       }
@@ -159,7 +165,7 @@ export default function VistaGeneralPage() {
                 <h2 className="font-bold justify-start text-2xl">DetallesVentas</h2>
                 <div className="flex flex-col items-start p-2">
                   <p>Número de registros: <span className="font-bold text-sidebar-accent group-hover:text-sidebar-accent-foreground">
-                    {numVentas !== null ? numVentas : "Cargando..."}
+                    {numDetallesVentas !== null ? numDetallesVentas : "Cargando..."}
                     </span>
                   </p>
                   <p>
