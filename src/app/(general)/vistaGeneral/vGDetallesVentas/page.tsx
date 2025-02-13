@@ -14,7 +14,7 @@ export default function VGDetallesVentasPage() {
                         Vista general de DetallesVentas
                     </h2>
                     <p className="text-lg mb-5">
-                        La tabla <span className="font-bold text-sidebar-accent">DetallesVentas</span> asdasdasdasdasdpleados.
+                        La tabla <span className="font-bold text-sidebar-accent">DetallesVentas</span> almacena información sobre las obras vendidas en cada venta, vinculando las obras con las respectivas transacciones. De esta tabla obtendremos la información de qué obras se han vendido en qué venta.
                     </p>
                 </div>
 
