@@ -58,16 +58,16 @@ pub fn insert_example_data(conn: &Connection) -> Result<()> {
 
     // Insertar 10 Empleados con nombres, correos y teléfonos realistas
     let empleados = vec![
-        ("José Martínez", "Gerente", "654987321", "jose.martinez@empresa.com"),
-        ("Laura Sánchez", "Administradora", "623456789", "laura.sanchez@empresa.com"),
-        ("Daniel Pérez", "Atención al cliente", "698745236", "daniel.perez@empresa.com"),
-        ("Marta Gómez", "Recepcionista", "657123987", "marta.gomez@empresa.com"),
-        ("Francisco Ramírez", "Coordinador de ventas", "632154987", "francisco.ramirez@empresa.com"),
-        ("Raquel Torres", "Asesora de arte", "689741235", "raquel.torres@empresa.com"),
-        ("Luis Hernández", "Técnico de iluminación", "677654321", "luis.hernandez@empresa.com"),
-        ("Carmen Navarro", "Guía de exposiciones", "698325741", "carmen.navarro@empresa.com"),
-        ("Antonio Vega", "Conservador de obras", "665874123", "antonio.vega@empresa.com"),
-        ("Beatriz Domínguez", "Relaciones públicas", "678963214", "beatriz.dominguez@empresa.com"),
+        ("José Martínez", "Directivo", "654987321", "jose.martinez@empresa.com"),
+        ("Laura Sánchez", "Empleado", "623456789", "laura.sanchez@empresa.com"),
+        ("Daniel Pérez", "Empleado", "698745236", "daniel.perez@empresa.com"),
+        ("Marta Gómez", "Directivo", "657123987", "marta.gomez@empresa.com"),
+        ("Francisco Ramírez", "Encargado", "632154987", "francisco.ramirez@empresa.com"),
+        ("Raquel Torres", "Empleado", "689741235", "raquel.torres@empresa.com"),
+        ("Luis Hernández", "Empleado", "677654321", "luis.hernandez@empresa.com"),
+        ("Carmen Navarro", "Encargado", "698325741", "carmen.navarro@empresa.com"),
+        ("Antonio Vega", "Empleado", "665874123", "antonio.vega@empresa.com"),
+        ("Beatriz Domínguez", "Encargado", "678963214", "beatriz.dominguez@empresa.com"),
     ];
 
     for (nombre, cargo, telefono, email) in empleados {

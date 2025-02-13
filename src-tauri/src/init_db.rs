@@ -115,7 +115,7 @@ fn insert_example_data(conn: &Connection) -> Result<()> {
     // Insertar Empleado si la tabla está vacía
     conn.execute(
         "INSERT INTO Empleados (nombre, cargo, telefono, email, fechaContratacion, fechaModificacion)
-         SELECT 'José Martínez', 'Empleado', '123555123', 'jose@example.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+         SELECT 'José Antonio', 'Empleado', '123555123', 'jose@example.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
          WHERE (SELECT COUNT(*) FROM Empleados) = 0;",
         [],
     )?;
