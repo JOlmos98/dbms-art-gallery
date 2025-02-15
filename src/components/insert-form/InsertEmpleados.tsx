@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { empleadosSchema } from "@/schemas/empleadosSchema";
-import { insertarEmpleado } from "@/backend/invokeEmpleados";
+import { insertEmpleado } from "@/backend/invokeEmpleados";
 
 export const InsertEmpleados = () => {
 
@@ -30,13 +30,13 @@ export const InsertEmpleados = () => {
   const onSubmit = async (values: z.infer<typeof empleadosSchema>) => {
     setLoading(true);
     try {
-      await insertarEmpleado(values.nombre, values.cargo, values.telefono, values.email, values.fechaContratacion);
+      await insertEmpleado(values.nombre, values.cargo, values.telefono, values.email, values.fechaContratacion);
 
       toast.success("Operación realizada con éxito.", {
         description: `Cliente ${values.nombre} registrado.`,
         action: {
-          label: "Deshacer",
-          onClick: () => console.log("Deshacer"),
+          label: "Ocultar",
+          onClick: () => console.log("Ocultar"),
         },
         className: "group-[.toaster]:text-green-500",
       });

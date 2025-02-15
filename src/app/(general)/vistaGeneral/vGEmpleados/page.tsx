@@ -6,7 +6,6 @@ import { TablaEmpleados } from "../../../../components/tabla-empleados-general/T
 export default function VGEmpleadosPage() {
   const { open } = useSidebar();
 
-
     return (
         <div className={`grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen ${open ? 'mx-32' : 'mx-64'}`}>
             <div className="flex flex-col row-start-2 items-start sm:items-start">

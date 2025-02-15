@@ -10,6 +10,8 @@ mod obras_repository;
 mod ventas_repository;
 mod detalles_ventas_repository;
 mod commands;             // Define el módulo para commands.rs
+mod init_db;
+mod example;
 
 /// Función de ejemplo para probar Tauri
 #[tauri::command]
@@ -19,6 +21,10 @@ fn greet(name: &str) -> String {
 
 fn main() {
     println!(" ========== App de Tauri iniciada ==========");
+    match init_db::init_db() {
+        Ok(_) => println!("Base de datos inicializada correctamente."),
+        Err(e) => eprintln!("Error al inicializar la base de datos: {}", e),
+    }
     
     Builder::default()
         .invoke_handler(generate_handler![
@@ -30,7 +36,7 @@ fn main() {
             commands::delete_cliente_command,
             commands::update_cliente_command,
             
-            commands::insertar_empleado_command,
+            commands::insert_empleado_command,
             commands::get_all_empleados_command,
             commands::get_empleado_by_id_command,
             commands::get_all_empleados_by_cargo_command,
@@ -39,7 +45,7 @@ fn main() {
             commands::delete_empleado_command,
             commands::update_empleado_command,
 
-            commands::insertar_artista_command,
+            commands::insert_artista_command,
             commands::get_all_artistas_command,
             commands::get_artista_by_id_command,
             commands::get_all_artistas_by_pais_command,
@@ -56,6 +62,8 @@ fn main() {
             commands::get_last_update_at_obras_command,
             commands::delete_obra_command,
             commands::update_obra_command,
+            commands::set_obra_no_disponible_command,
+            commands::comprobar_estado_obra_command,
 
             commands::insert_venta_command,
             commands::get_all_ventas_command,
@@ -72,6 +80,8 @@ fn main() {
             commands::get_detalles_by_obra_command,
             commands::get_count_detalles_ventas_command,
             commands::delete_detalle_venta_command,
+
+            commands::insert_example_data_command,
 
             greet,
         ])

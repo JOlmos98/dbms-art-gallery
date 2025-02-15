@@ -1,5 +1,5 @@
 use rusqlite::{params, Connection, Result};
-use crate::dto::{Obra, DetalleVenta};
+use crate::dto::Obra;
 
 /// Obtener todas las obras
 pub fn get_all_obras() -> Result<Vec<Obra>, String> {
@@ -146,6 +146,7 @@ pub fn get_obra_by_id(id: i32) -> Result<Obra, String> {
 }
 
 /// Insertar una nueva obra
+#[allow(non_snake_case)]
 pub fn insert_obra(titulo: &str, tipo: &str, precio: f64, descripcion: &str, fechaCreacion: &str, estado: &str, idAutor: i32) -> Result<usize, String> {
     let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
@@ -173,6 +174,7 @@ pub fn delete_obra(id: i32) -> Result<usize, String> {
 }
 
 /// Actualizar la información de una obra
+#[allow(non_snake_case)]
 pub fn update_obra(id: i32, titulo: &str, tipo: &str, precio: f64, descripcion: &str, fechaCreacion: &str, estado: &str) -> Result<usize, String> {
     let conn = Connection::open("./gallery.db")
         .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
@@ -186,4 +188,36 @@ pub fn update_obra(id: i32, titulo: &str, tipo: &str, precio: f64, descripcion: 
     .map_err(|e| format!("Error al actualizar obra: {}", e))?;
 
     Ok(rows_updated)
+}
+
+/// Marcar una obra como "No disponible" por su ID
+pub fn set_obra_no_disponible(id: i32) -> Result<usize, String> {
+    let conn = Connection::open("./gallery.db")
+        .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
+
+    let rows_updated = conn.execute(
+        "UPDATE Obras 
+         SET estado = 'No disponible', fechaModificacion = datetime('now') 
+         WHERE id = ?1",
+        params![id],
+    )
+    .map_err(|e| format!("Error al actualizar el estado de la obra: {}", e))?;
+
+    Ok(rows_updated)
+}
+
+/// Comprueba si una obra está disponible antes de asociarla a una venta
+pub fn comprobar_estado_obra(id_obra: i32) -> Result<bool, String> {
+    let conn = Connection::open("./gallery.db")
+        .map_err(|e| format!("Error al abrir la base de datos: {}", e))?;
+
+    let mut stmt = conn
+        .prepare("SELECT estado FROM Obras WHERE id = ?1")
+        .map_err(|e| format!("Error al preparar la consulta: {}", e))?;
+
+    let estado: String = stmt
+        .query_row([id_obra], |row| row.get(0))
+        .map_err(|e| format!("Error al obtener estado de la obra: {}", e))?;
+
+    Ok(estado == "Disponible") // Retorna `true` si la obra está disponible, `false` si no.
 }

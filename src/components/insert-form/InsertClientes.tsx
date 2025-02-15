@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { clientesSchema } from "@/schemas/clientesSchema";
-import { insertarCliente } from "@/backend/invokeClientes";
+import { insertCliente } from "@/backend/invokeClientes";
 
 export const InsertClientes = () => {
 
@@ -29,13 +29,13 @@ export const InsertClientes = () => {
   const onSubmit = async (values: z.infer<typeof clientesSchema>) => {
     setLoading(true);
     try {
-      await insertarCliente(values.nombre, values.direccion, values.telefono, values.email);
+      await insertCliente(values.nombre, values.direccion, values.telefono, values.email);
 
       toast.success("Operación realizada con éxito.", {
         description: `Cliente ${values.nombre} registrado.`,
         action: {
-          label: "Deshacer",
-          onClick: () => console.log("Deshacer"),
+          label: "Ocultar",
+          onClick: () => console.log("Ocultar"),
         },
         className: "group-[.toaster]:text-green-500",
       });
